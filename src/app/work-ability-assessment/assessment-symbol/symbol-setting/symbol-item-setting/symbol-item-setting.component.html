@@ -1,0 +1,22 @@
+
+<div class="option--btn--box">  
+    <button mat-flat-button color="primary" *ngIf="parameter.childCount == 0" type="button" (click)="createSymbolItem()"><i class="btn--icon create--spot--icon"></i>新建评估点</button>
+    <button mat-flat-button color="primary"  type="button" (click)="createKind()"><i class="btn--icon create--domain--icon"></i>新建评估域</button>
+    <button mat-flat-button color="primary"  type="button" (click)="publishQuest()"><i class="btn--icon release--icon"></i>发布指标</button>
+    <button mat-flat-button color="warn" type="button" *ngIf="parameter.childCount != 0 && selectedRows.length > 0" (click)="deleteKind()"><i class="ti-trash"></i>删除</button>
+    <button mat-flat-button color="warn" type="button" *ngIf="parameter.childCount == 0 && selectedRows.length > 0" (click)="deleteSymbolItem()"><i class="ti-trash"></i>删除</button>
+</div>
+  
+<div class="symbol--iten--setting--data--content--box">
+    <div class="left--ztree--box">
+        <app-z-tree  #zTree class="archiveManagement--data--list_tree symbol--iten--setting--list_tree" [ids]="ids" [option]="zTreeOption" (clickTree)="clickTreeEvent($event)"></app-z-tree> 
+    </div>
+    <div class="right--content--date--list--box" >    
+        <ag-grid-angular #sourceSys class="ag-theme-material grid--list self--grid--list" enableColResize rowHeight="50" [gridOptions]="gridOptions">  
+        </ag-grid-angular>
+        <my-pagination [pageSize]="parameter.pageSize"
+        [totalElement]="parameter.totalElement"
+    [currentPage]="parameter.currentPage"></my-pagination>
+        <loading-message *ngIf="loading"></loading-message>
+    </div>
+</div>

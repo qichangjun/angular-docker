@@ -1,0 +1,51 @@
+<a href="javascript:;" mat-stroked-button class="mat-menu-item__button fileinput-button">
+    <span>{{displayName}}</span>
+    <input [disabled]="disabledUpload" class="mat-menu-item__button" type="file" multiple ng2FileSelect [uploader]="uploader" />
+</a>
+<!-- <table class="table table-hover home--upload--table--box" *ngIf="uploader && uploader?.queue.length > 0">
+        <thead>
+          <tr class="table__th--tr">
+            <th ><div class="th-inner upload--table--file--name--td">文件名</div></th>
+            <th ><div class="th-inner">文件大小</div></th>
+            <th ><div class="th-inner">状态</div></th>
+            <th class="option--th"><div class="th-inner">操作</div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container >
+              <tr  *ngFor="let file of uploader.queue; let i = index">
+                  <td title="{{file._file.name}}"><div class="upload--table--file--name--td">{{file._file.name}}</div></td>
+                  <td>{{file.file.size | sizefilter}}</td>
+                  <td>
+                    <span *ngIf="file.isError" class="fa fa-exclamation-circle status--prompt--icon" style="color: #cd624c"></span>
+                    <span *ngIf="file.isSuccess" class="fa fa-check-circle status--prompt--icon" style="color: #56DA90"></span>
+                  <span *ngIf="file.isUploading">
+                    {{file.progress}}%
+                  </span>
+                  <span *ngIf="file.isReady && !file.isUploading">
+                      排队中...
+                  </span>
+                  </td>
+                  <td >
+                    <div [hidden]="file.isSuccess" class="option--btn--box">
+                      <button type="button" class="btn btn-success btn-xs"
+                              (click)="file.upload()" [disabled]="file.isReady || file.isUploading || file.isSuccess">
+                        <span class="glyphicon glyphicon-upload"></span> 上传
+                      </button>
+                      <button type="button" class="btn btn-warning btn-xs"
+                              (click)="file.cancel()" [disabled]="!file.isUploading">
+                        <span class="glyphicon glyphicon-ban-circle"></span> 取消
+                      </button>
+                      <button type="button" class="btn btn-danger btn-xs"
+                                [disabled]="file.isSuccess"
+                              (click)="file.remove()">
+                        <span class="glyphicon glyphicon-trash"></span> 移除
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+          </ng-container>
+        </tbody>
+    </table> -->
+
+    

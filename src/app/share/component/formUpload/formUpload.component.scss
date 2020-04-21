@@ -1,0 +1,20 @@
+@charset "utf-8";
+.home--upload--table--box{
+  width: 100%;
+  .option--btn--box{
+    .btn{
+      margin-right: 5px;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+}
+.fileinput-button{
+  &:hover{
+    color: #333;
+  }
+  &:focus{   
+    color: #333;
+  }
+}

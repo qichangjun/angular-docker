@@ -1,0 +1,54 @@
+<div class="cooperation--grouplist--box">
+  <div class="caption">  
+    <span class="">工作组单位</span>
+    <mat-select [(ngModel)]="parameter.showType" (selectionChange)="changeShowType()">
+      <mat-option [value]="'1'">待审核</mat-option>
+      <mat-option [value]="'2'">已完成</mat-option>
+      <mat-option [value]="'0'">所有</mat-option>
+    </mat-select>
+  </div>
+    
+    <ul *ngFor="let cooperationGroupList of cooperationGroupLists;let i = index" class="list--box">
+      <div class="head"><span class="num">{{i + 1}}</span>{{cooperationGroupList.cooperationGroup.name}}
+        <!-- <span>待审核数量 : {{getWatiToAuditNum(cooperationGroupList)}}</span>   -->
+        <span class="audit--num" *ngIf="getWatiToAuditNum(cooperationGroupList) != 0">{{getWatiToAuditNum(cooperationGroupList)}}</span>    
+        <span *ngIf="cooperationGroupList.toggle" (click)="cooperationGroupList.toggle = !cooperationGroupList.toggle" class="ti-angle-right toggle--btn"></span>
+        <span *ngIf="!cooperationGroupList.toggle" (click)="cooperationGroupList.toggle = !cooperationGroupList.toggle" class="ti-angle-down toggle--btn"></span>
+      </div>
+      <ng-container *ngIf="!cooperationGroupList.toggle">
+        <ng-container *ngFor="let unit of cooperationGroupList.unitList">
+          <li *ngIf="parameter.showType == '0' || (parameter.showType == '1' && unit.toAuditInfo) || (parameter.showType == '2' && unit.auditedInfo)">
+            <a [routerLink]="[]"  
+            routerLinkActive="selected"
+            [queryParamsHandling]="merge"
+            *ngIf="!unit.unitQuestInfo"
+             [queryParams]="{unitId : unit.id}">
+             {{unit.name}}
+             <div class="right--contetn--box">  
+              <span *ngIf="unit.toAuditInfo" class="to--audit--icon"></span>
+              <span *ngIf="unit.auditedInfo" class="audited--icon"></span>
+             </div>
+            </a>
+            <a [routerLink]="[]"  
+            *ngIf="unit.unitQuestInfo"
+            routerLinkActive="selected"
+            [queryParamsHandling]="merge"
+            nz-tooltip nzTitle="{{
+              unit.unitQuestInfo.sums == 0 ? '已完成' : 
+              '已完成:' + unit.unitQuestInfo.counts + '/' + unit.unitQuestInfo.sums}}"
+             [queryParams]="{unitId : unit.id}">
+             {{unit.name}}
+             <div class="right--contetn--box">  
+              <span *ngIf="unit.toAuditInfo" class="to--audit--icon"></span>
+              <span *ngIf="unit.auditedInfo" class="audited--icon"></span>
+              <nz-progress              
+              [nzShowInfo]="false"
+               [nzPercent]="unit.unitQuestInfo.result" nzType="circle" [nzWidth]="20"></nz-progress>
+             </div>
+             
+            </a>
+          </li>
+        </ng-container>
+      </ng-container>     
+    </ul>
+  </div>

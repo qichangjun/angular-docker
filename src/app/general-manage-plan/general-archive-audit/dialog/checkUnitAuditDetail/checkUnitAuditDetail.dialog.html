@@ -1,0 +1,41 @@
+<div class="medium--dialog check--unit--audit--detail--dialog">
+    <h2 mat-dialog-title>
+        详细信息</h2>
+        <mat-dialog-content>
+            <div class="attribute--row--wrap">
+                <div class="left--content--wrap">
+                    <h1 class="head">提交信息</h1>  
+                    <div class="row--box"><span class="title">提交单位：</span>{{detailInfo.SUB_UNIT}}</div>
+                    <div class="row--box"><span class="title">初次提交人：</span>{{detailInfo.FIST_SUB_OPE}}</div>
+                    <div class="row--box"><span class="title">最新提交人：</span>{{detailInfo.NEW_SUB_OPE}}</div>
+                    <div class="row--box"><span class="title">初次提交时间：</span>{{detailInfo.FIRST_SUB_TIME | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                    <div class="row--box"><span class="title">最新提交时间：</span>{{detailInfo.NEW_SUB_TIME | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                </div>    
+                <div class="right--content--wrap">
+                    <h1 class="head">审核信息</h1>  
+                    <div class="row--box"><span class="title">审核单位:</span>{{detailInfo.SUB_UNIT}}</div>
+                    <div class="row--box"><span class="title">初次审核时间：</span>{{detailInfo.FIST_REVIEW_TIME | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                    <div class="row--box"><span class="title">初次审核结果：</span>{{detailInfo.FIST_REVIEW_OPINION == 1 ? '通过' : detailInfo.FIST_REVIEW_OPINION == 0 ? '退回修改' : ''}}</div>
+                    <div class="row--box"><span class="title">最新审核时间：</span>{{detailInfo.NEW_REVIEW_TIME | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                    <div class="row--box"><span class="title">最新审核结果：</span>{{detailInfo.NEW_REVIEW_OPINION == 1 ? '通过' : 
+                        detailInfo.NEW_REVIEW_OPINION == 0 ? '退回修改' : ''}}</div>
+                </div>
+            </div>
+            <div class="audit--comment--box">  
+                <span class="title">审核意见：</span>      
+                <ul class="data--list">
+                        <li *ngFor="let opinion of detailInfo.NEW_OPINION;let i = index">
+                            {{i+1}} {{opinion.auditCommentDesc}}
+                        </li>
+                    </ul>
+            </div>
+           
+            
+        </mat-dialog-content>  
+        <mat-dialog-actions>
+            <button mat-stroked-button type="button" mat-dialog-close>关闭</button>
+        </mat-dialog-actions>
+</div>
+    
+
+<loading-message *ngIf="loading"></loading-message>

@@ -1,0 +1,111 @@
+.attribute--row--wrap{ 
+    .attribute--row--box{
+      margin-bottom: 13px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;  
+      &.row--has--two--col{
+        display: inline-block;
+        width: 46%;    
+        &.last--child{
+            margin-left: 8%;    
+        }
+    }  
+    &.no--space{
+      margin-bottom: 0;  
+    }
+    &.head--title{ 
+      .attribute--row--box__value{
+        width: 100%;
+        input{
+          font-size: 16px;  
+          // margin-left: 3px;
+        }  
+      }
+    }
+    &.description--textarea{
+      align-items: flex-start;  
+      .attribute--row--box__title{
+        margin-right: 0;    
+      }
+
+    }
+      &__title{
+        // flex: 1;
+        // display: inline-block;
+        // width: 110px;
+        // padding-left: 10px;
+        // margin-right: 40px;
+        // vertical-align: middle;
+        font-weight: normal;
+        position: relative;
+        margin-right: 8px;  
+        white-space: nowrap;  
+        &.no--title{
+            margin-right: 0;  
+        }
+        i{
+          margin-right: 10px;  
+        }
+        &.ver--top{
+          vertical-align: top;
+          padding-top: 7px;
+        }
+      }
+      &__value{
+        // display: inline-block;
+        flex:1 0 auto;  
+        position: relative;
+        // width: calc(100% - 110px);
+        // vertical-align: middle;
+        &.has--two--row{
+          flex: auto;  
+          white-space: normal;  
+        }
+          textarea{
+              border-color: #d7d7d7 !important;
+              border-radius: 5px !important;
+          }
+          mat-select{
+              border-color: #d7d7d7 !important;
+              border-radius: 3px !important;
+              width: 45px;
+              height: 26px;
+              padding: 2px 5px;
+          }
+          nz-date-picker{
+            display: inline;   
+          }
+          choose-copperation-group-list{
+            display: inline-block;
+            width: 100%;
+            height: auto;
+          }
+          &.line--feed{
+            width: calc(100% - 147px);  
+          }
+          &.mission--upload{
+            // padding-left: 16px;  
+          }
+      }
+    }
+  }
+.file--type--icon{
+    width: 18px;  
+}  
+.upload--file--box{
+  padding-left: 25px;
+  margin-bottom: 10px;
+    ul{
+        margin-bottom: 0;  
+        margin-left: 0;  
+        vertical-align: top;
+    }
+}
+  .option--btn--box{
+      button{
+        border-radius: 32px !important;
+        height: 32px !important;
+        font-size: 14px  !important;  
+      }
+  }

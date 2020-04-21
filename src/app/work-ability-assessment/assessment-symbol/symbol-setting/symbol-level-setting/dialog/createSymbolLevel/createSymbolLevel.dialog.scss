@@ -1,0 +1,43 @@
+@charset "utf-8";
+.create--unit--dialog--wrap{
+  .attribute--row--wrap{
+    padding-top: 7px;
+    .attribute--row--box{
+      margin-bottom: 16px;
+      &__title{
+        display: inline-block;
+        width: 110px;
+        padding-left: 10px;
+        margin-right: 40px;
+        vertical-align: middle;
+        font-weight: normal;
+        position: relative;
+        &.ver--top{
+          vertical-align: top;
+          padding-top: 7px;
+        }
+      }
+      &__value{
+        display: inline-block;
+        position: relative;
+        width: calc(100% - 150px);  
+        vertical-align: middle;
+        .weight--input{   
+          padding-right: 20px !important;  
+        }
+        .unit{
+          position: absolute;
+          top: 5px;
+          right: 5px;  
+        }
+      }
+    }
+  }
+}
+.text-danger{
+  position: absolute;
+  top: 4px;
+  left: 0;
+  font-size: 20px;
+  line-height: 0;
+}

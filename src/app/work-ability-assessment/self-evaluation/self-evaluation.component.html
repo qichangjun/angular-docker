@@ -1,0 +1,41 @@
+
+<div class="flex--data--wrap">
+  <div class="data--content--wrap">
+    <nav mat-tab-nav-bar class="big--tab">
+      <a mat-tab-link routerLinkActive #rla1="routerLinkActive"
+      [active]="rla1.isActive" [routerLink]="[]" [queryParams]="{'sts':'0'}">待提交</a>
+      <a mat-tab-link routerLinkActive #rla2="routerLinkActive"
+      [active]="rla2.isActive" [routerLink]="[]" [queryParams]="{'sts':'1'}">审核中</a>
+      <a mat-tab-link routerLinkActive #rla3="routerLinkActive"
+      [active]="rla3.isActive" [routerLink]="[]" [queryParams]="{'sts':'2'}">已完成</a>
+      <!-- <a mat-tab-link routerLinkActive #rla4="routerLinkActive"
+      [active]="rla4.isActive" [routerLink]="[]" [queryParams]="{'sts':'3'}">被退回</a> -->
+    </nav>
+    <div class="right--content--option--box">
+      <div class="option--btn--box">
+        <button mat-flat-button color="primary" 
+        *ngIf="parameter.sts == '0'"
+         type="button" (click)="postEvaluation()"><i class="btn--icon submit--icon"></i>提交</button>
+
+         <button mat-flat-button color="primary" 
+        *ngIf="parameter.sts == '0' || parameter.sts == '3'"
+         type="button" (click)="saveEvaluation()"><i class="ti-save"></i>保存记录</button>  
+
+         <button mat-flat-button color="primary" 
+        *ngIf="parameter.sts == '3'"
+         type="button" (click)="postEvaluationAgain()"><i class="ti-reload"></i>重新提交</button>  
+      </div>  
+    </div>
+    
+    <div class="right--content--date--list--box has--margin">
+      <div *ngFor="let gridOption of gridOptionsList" class="grid--list--box">
+        <div class="grid--option--name">{{gridOption.name}}</div>
+        <ag-grid-angular  style="height:auto" #sourceSys class="ag-theme-material grid--list no--left--border--grid self--grid--list" enableColResize  [gridOptions]="gridOption.gridOpiton">
+        </ag-grid-angular>  
+      </div>
+      <div *ngIf="gridOptionsList.length == 0" class="no--data--list--box"></div>    
+      <loading-message *ngIf="loading"></loading-message>
+    </div>
+    
+  </div>
+</div>

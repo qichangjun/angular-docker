@@ -1,0 +1,61 @@
+:host{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccd7e4;
+    background: #ffffff;
+}
+.right--content--option--box{
+    padding: 15px 14px;
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+    mat-select, input{
+        display: inline-block;
+        vertical-align: middle;  
+        width: 120px;
+        margin-right: 8px;
+    }
+
+    .search--box{
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        .search--input{
+            width: 160px;
+            padding-right: 20px;  
+        }
+        .search--btn{
+            position: absolute;
+            right: 13px;
+            top: 9px;
+            cursor: pointer;  
+            opacity: .8;
+            &:hover{
+                opacity: .9; 
+            }
+        }
+    }
+
+    .option--btn--box{
+        button{
+            margin-right: 8px;
+            &:last-child{
+                margin-right: 0;  
+            }
+        }
+    }
+}
+.right--content--date--list--box{
+    // margin: 0 12px;
+    height: calc(100% - 62px);     
+    .grid--list{
+        width: 100%;
+        height: calc(100% - 60px);  
+        padding: 0 14px;
+    }
+}
+
+.has-side-bar{
+    width: calc(100% - 400px)
+}

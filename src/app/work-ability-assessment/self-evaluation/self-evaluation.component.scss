@@ -1,0 +1,80 @@
+.mat-tab-nav-bar{
+    margin: 6px 12px 0 12px;
+}
+.mat-tab-link{
+    font-size: 18px;
+}
+.mat-tab-link.mat-tab-label-active{
+    color: #1E88E5;  
+    opacity: 1;  
+}
+.flex--data--wrap{  
+    display: flex;
+    width: 100%;
+    height: 100%; 
+    align-items: flex-start;
+    overflow-y: auto;
+}
+.data--content--wrap{
+    flex: 1 0 auto; 
+    flex-shrink: 1;
+    border: 1px solid #ccd7e4;       
+    width: calc(100% - 216px);    
+    height: 100%;   
+    background: #ffffff;  
+    .right--content--option--box{
+        padding: 15px 14px;
+        text-align: right;
+        height: 62px;  
+        position: relative;
+        z-index: 2;  
+        // border-bottom: 1px solid #e0e0e0;      
+        .option--btn--box{
+            display: flex;
+            justify-content: flex-end;
+            button{
+                margin-right: 8px;
+                &:last-child{
+                    margin-right: 0;  
+                }
+            }
+        }
+    }
+    .right--content--date--list--box{
+        // margin: 0 12px;
+        // height: calc(100% - 117px);  
+        height: calc(100% - 103px);  
+        // height: calc(100% - 75px);  
+        overflow-y: auto;     
+        position: relative;
+        top: -14px;
+        // z-index: 1;
+        // margin: 0 14px;  
+        .grid--list--box{
+            width: 100%;
+            // height: 100%;
+            margin-bottom: 15px;
+            padding: 0 14px;  
+            &:last-child{
+                margin-bottom: 0;
+            }
+            .grid--option--name{  
+                // position: relative;
+                // top: -43px;
+                font-size: 15px;  
+                margin-bottom: 16px;  
+                padding-left: 12px;  
+            }
+        }  
+        .grid--list{
+            width: 100%;
+      
+        }
+        .no--data--list--box{
+            width: 100%;
+            height: 100%;  
+            background: url(/assets/images/ztree--no--data.svg) no-repeat center center;
+            background-size: 13%;           
+        }
+    }
+}

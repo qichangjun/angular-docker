@@ -1,0 +1,34 @@
+<div class="flex--data--wrap">
+  <cooperation-group-list [type]="'selfEvaluation'"></cooperation-group-list>
+
+<div class="data--content--wrap">
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link routerLinkActive #rla1="routerLinkActive"
+
+    [active]="parameter.sts == '1'" [routerLink]="[]" [queryParams]="{'sts':'1',unitId:parameter.unitId,cooperationGroupId:parameter.cooperationGroupId}">待审核</a>
+    <a mat-tab-link routerLinkActive #rla2="routerLinkActive"
+
+    [active]="parameter.sts == '2'" [routerLink]="[]" [queryParams]="{'sts':'2',unitId:parameter.unitId,cooperationGroupId:parameter.cooperationGroupId}">已完成</a>
+     
+  </nav>
+  <div class="right--content--option--box">
+    <div class="option--btn--box">  
+      <button mat-flat-button color="primary" 
+      *ngIf="parameter.sts == '1'"
+        type="button" (click)="confirmEvaluation()"><i class="btn--icon confirm"></i>确认评定</button>
+    </div> 
+  </div>
+   
+  <div class="right--content--date--list--box has--margin">
+    <div *ngFor="let gridOption of gridOptionsList" class="grid--list--box">  
+      <div class="grid--option--name">{{gridOption.name}}</div>  
+      <ag-grid-angular  style="height:auto" #sourceSys class="ag-theme-material grid--list no--left--border--grid self--grid--list" enableColResize  [gridOptions]="gridOption.gridOpiton">
+      </ag-grid-angular>  
+    </div>
+    <div *ngIf="gridOptionsList.length == 0" class="no--data--list--box"></div>
+   
+    <loading-message *ngIf="loading"></loading-message>
+  </div>
+  
+</div>
+</div>

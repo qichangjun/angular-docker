@@ -1,0 +1,46 @@
+
+
+{
+    
+    "/teamworkapi": {
+      "target": {
+          "host" : "amberdata.cn",
+          "protocol" : "http",
+          "port" : "80"
+      },
+      "secure": false,
+      "changeOrigin": true,
+       "logLevel": "info"
+    },
+    "/im": {
+        "target": {
+            "host" : "amberdata.cn",
+            "protocol" : "http",
+            "port" : "80"
+        },
+        "secure": false,
+        "changeOrigin": true,
+         "logLevel": "info"
+    },
+    "/index": {
+        "target": {
+            "host" : "amberdata.cn/im",
+            "protocol" : "http",
+            "port" : "80"
+        },
+        "secure": false,
+        "changeOrigin": true,
+         "logLevel": "info"
+    },
+    
+    "/adminapi": {
+      "target": {
+          "host" : "amberdata.cn",
+          "protocol" : "http",
+          "port" : "80"
+      },
+      "secure": false,
+      "changeOrigin": true,
+       "logLevel": "info"
+    }
+}

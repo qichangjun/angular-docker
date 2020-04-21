@@ -1,0 +1,19 @@
+<nz-tree-select
+    #nzTreeSelect
+    style="width: 200px;"
+    nzPlaceHolder="设置执行者"  
+    nzCheckable
+    [nzDisabled]="disableEdit"
+    [nzDropdownMatchSelectWidth]="true"
+    [nzDropdownStyle]="{ 'max-height': '300px' }"
+    [(ngModel)]="valueInfo"
+    [nzNodes]="selectItemList"
+    [nzMaxTagCount]="2"
+    [nzMaxTagPlaceholder]="maxTagPlaceholder"           
+    (ngModelChange)="changeSelect($event)"
+>
+</nz-tree-select>
+
+<ng-template #maxTagPlaceholder let-nodes="$implicit" >
+    ...
+</ng-template>

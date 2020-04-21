@@ -1,0 +1,33 @@
+<form [formGroup]="myForm" (ngSubmit)="postDate()" class="medium--dialog create--unit--dialog--wrap">
+    <h2 mat-dialog-title>
+        {{data.type == 'create' ? '新建评估域' : '编辑评估域'}}</h2>  
+    <mat-dialog-content>
+        <div class="attribute--row--wrap">  
+            <div class="attribute--row--box">
+                <label for="grpname" class="attribute--row--box__title grpname"><span class="text-danger">.</span>评估域名称</label>
+                <div class="attribute--row--box__value">
+                    <input type="text" matInput class="form-control" id="grpname" formControlName="grpname" />
+                    <mat-error *ngIf="myForm.controls.grpname.invalid && myForm.controls.grpname.dirty">评估域名称{{_formErrorMessageService.getErrorMessage(myForm.controls.grpname)}}</mat-error>
+                </div>
+            </div>
+          
+       
+            <div class="attribute--row--box">
+                <label for="grpdesc" class="attribute--row--box__title ver--top grpdesc">描述</label>
+                <div class="attribute--row--box__value">
+                  
+                    <textarea  matInput class="form-control" id="grpdesc" formControlName="grpdesc" rows="3"></textarea>
+                    
+                </div>
+            </div>
+        </div>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button type="button" mat-dialog-close>取消</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!myForm.valid">确定</button>
+    </mat-dialog-actions>
+</form>
+
+<loading-message *ngIf="loading"></loading-message>

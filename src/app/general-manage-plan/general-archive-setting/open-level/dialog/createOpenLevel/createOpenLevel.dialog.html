@@ -1,0 +1,40 @@
+<form [formGroup]="myForm" (ngSubmit)="postDate()" class="medium--dialog create--unit--dialog--wrap">
+    <h2 mat-dialog-title>
+        {{data.type == 'create' ? '新建开放等级' : '编辑开放等级'}}</h2>
+    <mat-dialog-content>
+        <div class="attribute--row--wrap">
+            <div class="attribute--row--box">
+                <label for="dictionaryName" class="attribute--row--box__title dictionaryName"><span class="text-danger">.</span>开放等级名称</label>
+                <div class="attribute--row--box__value">
+                    <input type="text" matInput class="form-control" id="dictionaryName" formControlName="dictionaryName" />
+                    <mat-error *ngIf="myForm.controls.dictionaryName.invalid && myForm.controls.dictionaryName.dirty">开放等级名称{{_formErrorMessageService.getErrorMessage(myForm.controls.dictionaryName)}}</mat-error>
+                </div>
+            </div>
+          
+            <div class="attribute--row--box last--child">
+                <label for="dictionaryCode" class="attribute--row--box__title dictionaryCode"><span class="text-danger">.</span>开放等级编码</label>
+                <div class="attribute--row--box__value">
+                    <input type="text" matInput class="form-control" id="dictionaryCode" formControlName="dictionaryCode" />
+                    <mat-error *ngIf="myForm.controls.dictionaryCode.invalid && myForm.controls.dictionaryCode.dirty">开放等级编码{{_formErrorMessageService.getErrorMessage(myForm.controls.dictionaryCode)}}</mat-error>
+                </div>
+            </div>
+
+            <div class="attribute--row--box">
+                <label for="dictionaryDescription" class="attribute--row--box__title ver--top dictionaryDescription">说明</label>
+                <div class="attribute--row--box__value">
+                  
+                    <textarea  matInput class="form-control" id="dictionaryDescription" formControlName="dictionaryDescription" rows="3"></textarea>
+                    
+                </div>
+            </div>
+        </div>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button type="button" mat-dialog-close>取消</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!myForm.valid">确定</button>
+    </mat-dialog-actions>
+</form>
+
+<loading-message *ngIf="loading"></loading-message>

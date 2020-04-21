@@ -1,0 +1,191 @@
+<div class="mission-edit--sidebar">  
+        <div class="head--option--box">
+                <div class="option--btn"
+                  *ngIf="(!disableEdit && (baseInfo.finishSts == '0' || baseInfo.finishSts == '1'))
+                  || (disableEdit && (taskStreamSts == '0' || taskStreamSts == '3') && taskStreamReceiveSts != 0)
+                  "
+                >  
+                        <button mat-flat-button color="accent" class="option--btn" *ngIf="!disableEdit && baseInfo.finishSts == '0'" (click)="finishMission('1')">结束任务</button>
+                        <button mat-flat-button color="accent" class="option--btn" *ngIf="!disableEdit && baseInfo.finishSts == '1'" (click)="finishMission('0')">重启任务</button>
+                        <button mat-flat-button color="primary"  class="option--btn success"*ngIf="disableEdit && (taskStreamSts == '0' || taskStreamSts == '3') && taskStreamReceiveSts != 0" (click)="postMission()">完成任务</button>                        
+      
+                </div>
+
+                <div *ngIf="disableEdit" class="prompt--content--box" [ngClass]="{successed:(taskStreamSts == '1' || taskStreamSts == '2'),failed:(taskStreamSts == '0' || taskStreamSts == '3' || taskStreamReceiveSts == 0)}">
+                        <i class="fa fa-info-circle"></i>  
+                        <span>当前状态：{{taskStreamReceiveSts == 0 ? '未接收' :
+                                taskStreamSts == '0' ? '未交' :
+                                taskStreamSts == '1' ? '已交' : 
+                                taskStreamSts == '2' ? '完成' : 
+                                taskStreamSts == '3' ? '被退回' : ''
+                              }}</span>
+                        <a *ngIf="taskStreamSts == '3' || taskStreamSts == '2'" class="remove--btn" (click)="checkBackDetail()">详细信息</a>  
+                </div>
+                <div>
+                        <a *ngIf="!disableEdit" (click)="deleteMission()" class="ti-trash"></a>  
+
+                        <i (click)="closeSideBarAndUpdate.emit(false)" class="remove--sidebar--btn ti-close"></i>  
+                </div>
+                
+               
+        </div>
+  
+        <form [formGroup]="myForm" (ngSubmit)="postDate()" class="mission-edit--sidebar--form"
+        [ngClass]="{noBUtton : (disableEdit && taskStreamReceiveSts != 0) }"
+        >
+           
+                        <div class="attribute--row--wrap">
+                                <div class="attribute--row--box head--title">
+                                        <!-- <label for="taskTitle" class="attribute--row--box__title taskTitle">
+                                                任务标题</label>   -->
+                                        <div class="attribute--row--box__value">
+                                                <input [readonly]="disableEdit" type="text" matInput class="form-control no--border" id="taskTitle" formControlName="taskTitle" />
+                                                <mat-error *ngIf="myForm.controls.taskTitle.invalid && myForm.controls.taskTitle.dirty">
+                                                        任务标题{{_formErrorMessageService.getErrorMessage(myForm.controls.taskTitle)}}
+                                                </mat-error>
+                                        </div>
+                                </div>  
+                                
+                                <div class="attribute--row--box" [hidden]="disableEdit">
+                                        <label for="chooseGroupInfo" class="attribute--row--box__title no--title chooseGroupInfo">
+                                        <i class="ti-user"></i></label>  
+                                        <div class="attribute--row--box__value line--feed">
+                                                <choose-copperation-group-list      
+                                                [disableEdit]="disableEdit"
+                                                 id="chooseGroupInfo" formControlName="chooseGroupInfo"></choose-copperation-group-list>
+                                        </div>
+                                </div>
+                                <div class="attribute--row--box">
+                                        <label for="startAt" class="attribute--row--box__title no--title startAt">
+                                                <i class="ti-calendar"></i></label>  
+                                        <div class="attribute--row--box__value">
+                                                <nz-date-picker [nzDisabled]="disableEdit" id="startAt" formControlName="startAt" class="form-control no--border"
+                                                nzPlaceHolder="请选择开始时间"
+                                                ></nz-date-picker>
+                                                <mat-error *ngIf="myForm.controls.startAt.invalid && myForm.controls.startAt.dirty">
+                                                        开始时间{{_formErrorMessageService.getErrorMessage(myForm.controls.startAt)}}
+                                                </mat-error>
+                                                ~&nbsp;
+                                        <!-- </div> -->
+                                <!-- </div>
+        
+                                <div class="attribute--row--box"> -->
+                                        <!-- <label for="endAt" class="attribute--row--box__title endAt">
+                                                <i class="ti-user"></i>截止时间</label> -->
+                                        <!-- <div class="attribute--row--box__value"> -->
+                                                <nz-date-picker [nzDisabled]="disableEdit" id="endAt" formControlName="endAt" class="form-control no--border"
+                                                nzPlaceHolder="请选择截止时间"
+                                                ></nz-date-picker>
+                                                <mat-error *ngIf="myForm.controls.endAt.invalid && myForm.controls.endAt.dirty">
+                                                        截止时间{{_formErrorMessageService.getErrorMessage(myForm.controls.endAt)}}
+                                                </mat-error>
+                                        </div>
+                                </div>
+        
+                                <div class="attribute--row--box">
+                                        <label for="alarmTime" class="attribute--row--box__title no--title alarmTime">
+                                                <i class="ti-alarm-clock"></i></label>  
+                                        <div class="attribute--row--box__value">
+                                                <nz-date-picker [nzDisabled]="disableEdit" id="alarmTime" formControlName="alarmTime" class="form-control no--border"
+                                                nzPlaceHolder="请选择提醒时间"
+                                                ></nz-date-picker>
+                                                <mat-error *ngIf="myForm.controls.alarmTime.invalid && myForm.controls.alarmTime.dirty">
+                                                        设置提醒{{_formErrorMessageService.getErrorMessage(myForm.controls.alarmTime)}}
+                                                </mat-error>
+                                        </div>
+                                </div>
+                                <div class="attribute--row--box description--textarea">
+                                        <label for="isScore" class="attribute--row--box__title isScore">
+                                                <i class="ti-align-left"></i></label>  
+                                        <div class="attribute--row--box__value">                                             
+                                                <textarea [hidden]="disableEdit"  [readonly]="disableEdit" placeholder="任务描述" class="form-control" id="taskDesc" formControlName="taskDesc"  rows="3"></textarea>
+                                                <span *ngIf="disableEdit" class="submit--dec">
+                                                        {{myForm.value.taskDesc}}
+                                                </span>
+                                        </div>
+                                </div>  
+                                <div class="attribute--row--box">
+                                        <label for="taskPrior" class="attribute--row--box__title has--space taskPrior">
+                                                <i class="ti-list"></i>优先级</label>
+                                        <div class="attribute--row--box__value">
+                                                <mat-select [disabled]="disableEdit" id="taskPrior" formControlName="taskPrior">
+                                                        <mat-option [value]="0">低</mat-option>
+                                                        <mat-option [value]="1">中</mat-option>
+                                                        <mat-option [value]="2">高</mat-option>
+                                                </mat-select>
+                                        </div>
+                                </div>
+        
+                                <!-- <div class="attribute--row--box">
+                                        <label for="isScore" class="attribute--row--box__title isScore">
+                                                <i class="ti-slice"></i>是否记分</label>
+                                        <div class="attribute--row--box__value">
+                                                <mat-slide-toggle [disabled]="disableEdit" id="isScore" formControlName="isScore" class="example-margin">
+                                                </mat-slide-toggle>
+        
+                                        </div>
+                                </div> -->
+        
+                                <div class="attribute--row--box upload--row--box" [ngClass]="{'has-no-upload-button':disableEdit}">   
+                                                <label for="isScore" class="attribute--row--box__title no--title isScore">
+                                                        <i class="ti-clip"></i></label>  
+                                                
+                                                <div class="attribute--row--box__value mission--upload">
+                                                       <form-upload
+                                                       *ngIf="!disableEdit"
+                                                       [displayName]="'添加附件'"
+                                                       [uploadUrl]="'missionUpload'"
+                                                       (uploadFinish)="uploadFinish($event)"
+                                                       ></form-upload>
+                
+                                                </div>
+                                                <div class="upload--file--box">
+                                                        <ul>
+                                                                <li *ngFor="let file of storageFileList;let i = index">
+                                                                                <img class="file--type--icon" onerror="this.src='assets/images/icon/unknown.svg'" src="./assets/images/icon/{{file['name'] | fileNameToIcon}}.svg"
+                                                                                alt="">                                                                
+                                                                                <a (click)="downloadFile(file)">{{file.filename}}</a>
+                                                                                <span *ngIf="!disableEdit" class="remove--btn"
+                                                                                nz-popconfirm
+                                                                                nzOkText="确定"
+                                                                                nzCancelText="取消"
+                                                                                nzTitle="确定要删除该文件吗?"
+                                                                                nzPopconfirmPlacement="bottom"
+                                                                                (nzOnConfirm)="deletFile(file,i)"
+                                                                                 >x</span>
+                                                                        </li>
+                                                                <li *ngFor="let file of accessoryIdList">
+                                                                        <img class="file--type--icon" onerror="this.src='assets/images/icon/unknown.svg'" src="./assets/images/icon/{{file['name'] | fileNameToIcon}}.svg"
+                                                                        alt="">
+                                                                        {{file.name}}
+                                                                        <span *ngIf="!disableEdit" class="remove--btn ti-close"
+                                                                        nz-popconfirm
+                                                                        nzOkText="确定"
+                                                                        nzCancelText="取消"
+                                                                        nzTitle="确定要删除该文件吗?"
+                                                                        nzPopconfirmPlacement="bottom"
+                                                                        (nzOnConfirm)="accessoryIdList.splice(i,1)"
+                                                                         title="删除"
+                                                                        ></span>
+                                                                </li>
+                                                        </ul>
+                                                </div>
+                                                
+                                </div>
+                                
+        
+                                
+                        </div>
+        
+                        <mission-of-unit-status-info (updateMissionStreamFinish)="updateMissionStreamFinish($event)" [id]="id" *ngIf="!disableEdit"></mission-of-unit-status-info>
+                        <mission-stream-update (updateMissionStreamFinish)="updateMissionStreamFinish($event)" [id]="taskStreamId" *ngIf="disableEdit"></mission-stream-update>
+                        <div class="option--tab--submit--box"> 
+                                <button mat-flat-button color="accent" type="submit" *ngIf="!disableEdit"  [disabled]="!myForm.valid">完成</button>
+                                <button mat-flat-button color="primary"  class="option--btn success"*ngIf="disableEdit && taskStreamReceiveSts == 0" (click)="confirmReceive()">确认接收</button>
+                        </div>
+                        
+        </form>
+</div>
+
+
+<loading-message *ngIf="loading"></loading-message>

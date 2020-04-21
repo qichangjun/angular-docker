@@ -1,0 +1,70 @@
+<form [formGroup]="myForm" (ngSubmit)="postDate()" class="big--dialog create--unit--dialog--wrap">
+    <h2 mat-dialog-title>
+        {{data.type == 'create' ? '新建评估点' : '编辑评估点'}}</h2>
+    <mat-dialog-content>
+        <div class="attribute--row--wrap">  
+            <div class="attribute--row--box">
+                <label for="questName" class="attribute--row--box__title ver--top questName"><span class="text-danger">.</span>评估点</label>
+                <div class="attribute--row--box__value">            
+                    <input type="text" class="form-control" id="questName" formControlName="questName" >
+                    <mat-error *ngIf="myForm.controls.questName.invalid && myForm.controls.questName.dirty">评估点{{_formErrorMessageService.getErrorMessage(myForm.controls.questName)}}</mat-error>
+                </div>
+            </div>
+            <div class="attribute--row--box">
+                <label for="questDescription" class="attribute--row--box__title ver--top questDescription">评估说明</label>
+                <div class="attribute--row--box__value">
+                    <textarea  matInput class="form-control" id="questDescription" formControlName="questDescription" rows="2"></textarea>      
+                </div>
+            </div>
+            <!-- <div class="attribute--row--box row--has--two--col">
+                <label for="dictionaryCode" class="attribute--row--box__title dictionaryCode"><span class="text-danger">.</span>评估类型</label>
+                <div class="attribute--row--box__value">
+                    <mat-radio-group id="questEvalType" formControlName="questEvalType">
+                        <mat-radio-button class="single--radio--btn" [value]="'M'">手动评估</mat-radio-button>
+                        <mat-radio-button class="single--radio--btn" [value]="'A'">系统量化</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+            </div> -->
+
+            <div class="attribute--row--box long--title">
+                <label for="dictionaryCode" class="attribute--row--box__title dictionaryCode"><span class="text-danger">.</span>是否需要证明材料</label>
+                <div class="attribute--row--box__value">
+                    <mat-radio-group id="questNeedVerify" formControlName="questNeedVerify">
+                        <mat-radio-button class="single--radio--btn" [value]="1">是</mat-radio-button>
+                        <mat-radio-button class="single--radio--btn" [value]="0">否</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+            </div>
+
+            <div class="attribute--row--box">
+                <label for="dictionaryCode" class="attribute--row--box__title dictionaryCode"><span class="text-danger">.</span>评估方式</label>
+                <div class="attribute--row--box__value">
+                    <mat-radio-group id="questCategory" formControlName="questCategory">
+                        <mat-radio-button class="single--radio--btn" [value]="'S'">单选</mat-radio-button>
+                        <mat-radio-button class="single--radio--btn" [value]="'M'">多选</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+            </div>
+           
+
+            <div class="attribute--row--box">
+                <label class="attribute--row--box__title ver--top">评分项</label>
+                <div class="attribute--row--box__value">
+                    <quest-item formControlName="questItem" id="questItem" class="choose--box"></quest-item>
+
+                    <mat-error class="create--plur--choose--error" *ngIf="myForm.controls.questItem.invalid && myForm.controls.questItem.dirty">
+                        评分项不能为空
+                    </mat-error>
+                </div>
+            </div>
+        </div>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button type="button" mat-dialog-close>取消</button>        
+        <button mat-flat-button color="primary" type="submit" [disabled]="!myForm.valid">确定</button>
+    </mat-dialog-actions>
+</form>
+
+<loading-message *ngIf="loading"></loading-message>

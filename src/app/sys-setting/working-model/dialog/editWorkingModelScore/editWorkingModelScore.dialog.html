@@ -1,0 +1,22 @@
+<form [formGroup]="myForm" (ngSubmit)="postDate()" class="medium--dialog create--unit--dialog--wrap">
+        <h2 mat-dialog-title>
+            编辑总分</h2>
+        <mat-dialog-content>
+            <div class="attribute--row--wrap">
+                <div class="attribute--row--box row--has--two--col">
+                    <label for="score" class="attribute--row--box__title score"><span class="text-danger">.</span>总分</label>
+                    <div class="attribute--row--box__value">
+                        <input type="number" matInput class="form-control" id="score" formControlName="score" />
+                        <mat-error *ngIf="myForm.controls.score.invalid && myForm.controls.score.dirty">总分{{_formErrorMessageService.getErrorMessage(myForm.controls.score)}}</mat-error>
+                    </div>
+                </div>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button mat-button type="button" mat-dialog-close>取消</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="!myForm.valid">确定</button>
+        </mat-dialog-actions>
+    </form>
+    
+    <loading-message *ngIf="loading"></loading-message>
+    

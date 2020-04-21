@@ -1,0 +1,63 @@
+<mat-toolbar color="primary" class="topbar telative">
+  <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">
+          <b></b>
+          <span fxShow="false" fxShow.gt-xs>
+     
+           <span class="light-logo">
+               杭州市档案局业务指导系统</span>
+      
+          </span> </a>
+  </div>
+
+  <form class="app-search">
+      <input type="text" class="form-control" placeholder="搜索内容">
+      <a class="cl-srh-btn"><i class="ti-close"></i></a>
+  </form>
+  <span class="fxflex" fxFlex></span>
+
+  <app-header></app-header>
+
+</mat-toolbar>
+
+<div>
+  消息
+</div>
+
+<div ButtonPermissionController [buttonId]="'TWWorkAbilityAssess:unitStatistics'" routerLink="/workspace/workAbilityAssessment/ScoreOrderDetail">
+  数据驾驶舱
+</div>
+
+<div ButtonPermissionController [buttonId]="'TWWorkAbilityAssess:statistics'" routerLink="/workspace/workAbilityAssessment/scoreOrder">
+  数据驾驶舱
+</div>
+<div>
+  法规标准
+</div>
+<div>
+  基础数据填报
+</div>
+<div ButtonPermissionController [buttonId]="'TWWorkAbilityAssess:self'" routerLink="/workspace/workAbilityAssessment/selfEvaluation">
+  业务能力评价
+</div>
+
+<div ButtonPermissionController [buttonId]="'TWWorkAbilityAssess:assess'" routerLink="/workspace/workAbilityAssessment/assessmentSymbol">
+  业务能力评价
+</div>
+
+
+<div ButtonPermissionController [buttonId]="'TWIntegratedManagement:send'" routerLink="/workspace/generalManagePlan/generalArchivePlan">
+  综合归档计划
+</div>
+
+<div ButtonPermissionController [buttonId]="'TWIntegratedManagement:audit'" routerLink="/workspace/generalManagePlan/generalArchiveAudit">
+  综合归档计划
+</div>
+
+<div ButtonPermissionController [buttonId]="'TWTaskManagent:myTask'" routerLink="/workspace/missionManage/postMission">
+  任务中心
+</div>
+
+<div ButtonPermissionController [buttonId]="'TWTaskManagent:distributeTask'" routerLink="/workspace/missionManage/startMission">
+  任务中心
+</div>

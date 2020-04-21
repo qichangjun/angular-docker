@@ -1,0 +1,37 @@
+<form [formGroup]="myForm" (ngSubmit)="postDate()" class="medium--dialog create--unit--dialog--wrap">
+        <h2 mat-dialog-title>
+            综合归档计划制定质量评定</h2>
+        <mat-dialog-content>
+            <div class="attribute--row--wrap">
+                <div class="attribute--row--box">  
+                    <!-- <label for="rateIdAudit" class="attribute--row--box__title rateIdAudit"><span class="text-danger">.</span>等级名称</label> -->
+                    <div class="attribute--row--box__value">
+                            <mat-radio-group id="rateIdAudit" formControlName="rateIdAudit">
+                                    <ng-container *ngFor="let auditLevel of auditLevelList">
+                                            <mat-radio-button class="single--radio--btn"  [value]="auditLevel.id">  
+                                                   {{auditLevel.dictionaryCode}}.{{auditLevel.dictionaryName}}  
+                                            </mat-radio-button>     
+                                            <div class="audit--level--desc">  
+                                                {{auditLevel.dictionaryDescription}}
+                                            </div>
+                                    </ng-container>
+                                                                   
+                            </mat-radio-group>                        
+                        <!-- <mat-error *ngIf="myForm.controls.rateIdAudit.invalid && myForm.controls.rateIdAudit.dirty">
+                            评定等级{{_formErrorMessageService.getErrorMessage(myForm.controls.rateIdAudit)}}</mat-error> -->
+                    </div>
+                </div>
+              
+              
+            </div>
+    
+    
+        </mat-dialog-content>
+        <mat-dialog-actions>
+                <button mat-flat-button color="primary" mat-dialog-close>取消</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="!myForm.valid">确定</button>
+        </mat-dialog-actions>
+    </form>
+    
+    <loading-message *ngIf="loading"></loading-message>
+    

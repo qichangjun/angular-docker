@@ -1,0 +1,32 @@
+<div class="pagination--box" *ngIf="totalElement != 0">
+    <mat-checkbox *ngIf="enableSelectAll" class="select--all"  [(ngModel)]="isSelectAll" (change)="selectAll.emit(isSelectAll)">跨页全选</mat-checkbox>
+
+    数据记录共 {{totalElement}} 条
+    当前第{{currentPage}}页 / 共{{pageCount[pageCount.length - 1]}}页    
+    <button mat-stroked-button class="page--btn"  [disabled]="currentPage == 1" (click)="currentPage = 1;changePageBtn()"><span class="ti-angle-double-left"></span></button>
+    <button mat-stroked-button class="page--btn"  [disabled]="currentPage == 1" (click)="currentPage=currentPage-1;changePageBtn()"><span class="ti-angle-left"></span></button>
+    第
+    <input type="number" matInput class="form-control input--number"  [(ngModel)]="save_currentPage" (keyup)="changePage($event)">  
+    <!-- <mat-select (selectionChange)="changePage($event)">
+            <mat-select-trigger>
+                    {{currentPage}}
+            </mat-select-trigger>
+            <mat-option *ngFor="let page of pageCount" [value]="page">{{page}}</mat-option>
+    </mat-select> -->
+    页
+    <button mat-stroked-button class="page--btn"  [disabled]="currentPage == pageCount[pageCount.length - 1]" (click)="currentPage=currentPage+1;changePageBtn()"><span class="ti-angle-right"></span></button>
+    <button mat-stroked-button class="page--btn"  [disabled]="currentPage == pageCount[pageCount.length - 1]" (click)="currentPage = pageCount[pageCount.length - 1];changePageBtn()"><span class="ti-angle-double-right"></span></button>
+    
+
+    每页
+    <mat-select (selectionChange)="changePageSize($event)" [(ngModel)]="pageSize">
+            <mat-select-trigger>
+                    {{pageSize}}
+            </mat-select-trigger>
+            <mat-option  [value]="'20'">20</mat-option>
+            <mat-option  [value]="'50'">50</mat-option>
+            <mat-option  [value]="'100'">100</mat-option>
+            <mat-option  [value]="'200'">200</mat-option>
+    </mat-select>
+    条
+</div>

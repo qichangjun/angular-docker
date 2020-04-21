@@ -1,0 +1,69 @@
+<div class="medium--dialog post--review--option--dialog--wrap">
+    <h2 mat-dialog-title>
+        审核意见</h2>
+    <mat-dialog-content>
+        <div class="attribute--row--wrap">
+            <div class="auditsts--box right--content">
+                <h1 class="caption">对该综合归档计划</h1>
+                <mat-radio-group [(ngModel)]="hasOpinion">
+                    <mat-radio-button class="single--radio--btn" [value]="false">无意见</mat-radio-button>
+                    <mat-radio-button class="single--radio--btn" [value]="true">有修改意见</mat-radio-button>  
+                </mat-radio-group>
+            </div>
+            <ng-container *ngIf="hasOpinion" >
+                <div class="attribute--row--box show--oinion--row--box">针对该综合归档计划的
+                    <mat-select [(ngModel)]="opinionClass" class="dictionary--name--select" (selectionChange)="changeOpinionClass($event)" >
+                        <mat-option *ngFor="let opinionClassList of opinionClassLists" [value]="opinionClassList.id">
+                            {{opinionClassList.dictionaryName}}
+                        </mat-option>
+                        <mat-option [value]="''">无</mat-option>
+                    </mat-select>
+                    ，现提出如下意见和建议：
+                </div>
+                <div class="attribute--row--box add--opinion--box">
+                    <mat-select [(ngModel)]="opinionColumn">
+                        <mat-option *ngFor="let opinionColumnList of opinionColumnLists" [value]="opinionColumnList.id">{{opinionColumnList.dictionaryName}}</mat-option>
+                        <mat-option [value]="''">无</mat-option>
+                    </mat-select>
+                    <button mat-flat-button color="accent" (click)="addOpinion()" [disabled]="disableAddOpinion()">添加到意见栏</button>
+                </div>
+                <div class="attribute--row--box">
+                    <div class="input--prompt--content">我还有其他的意见和建议</div>
+                    <div class="input--opinion--box">
+                        <input type="text" class="form-control" [(ngModel)]="auditCommentDesc" placeholder="如没有意见和建议，可以不用填写">
+                        <!-- <button mat-flat-button color="accent" >添加到意见栏</button> -->
+                    </div>
+                    <button mat-flat-button color="accent" (click)="addauditCommentDesc()" [disabled]="!auditCommentDesc">添加到意见栏</button>
+                </div>
+
+                <div class="auditsts--box">
+                    <h1 class="caption">意见栏</h1>
+                    <ul>
+                        <li *ngFor="let comment of auditComment;let i = index">
+                            <span class="num">{{i + 1}}</span>
+                            <span>{{comment.opinionClassName}} : {{comment.opinionColumnName}}</span>
+                            <span (click)="auditComment.splice(i,1)" class="ti-trash"></span>
+                        </li>
+                        <li *ngFor="let desc of auditCommentDescValues;let i = index">
+                            <span class="num">{{auditComment.length + i + 1}}</span>
+                            <span>{{desc}}</span>  
+                            <span (click)="auditCommentDescValues.splice(i,1)"  class="ti-trash"></span>
+                        </li>
+                    </ul>
+                </div>               
+            </ng-container>
+            <!-- <ng-container *ngIf="!hasOpinion">
+                您对该单位制定的综合归档计划无修改意见，则该计划通过审核并评定为A级
+            </ng-container> -->
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button type="button" mat-dialog-close>取消</button>    
+        <button mat-flat-button color="primary" *ngIf="hasOpinion" (click)="postData('0')">返回修改</button>
+        <button mat-flat-button color="primary" *ngIf="!hasOpinion" type="button" (click)="postData('1')">审核通过</button>
+    </mat-dialog-actions>
+</div>
+
+
+<loading-message *ngIf="loading"></loading-message>

@@ -1,0 +1,65 @@
+
+<div class="small--dialog">
+    <h2 mat-dialog-title>
+        重新评定</h2>
+     <mat-dialog-content>
+         <div class="attribute--row--wrap">
+ 
+ 
+             <div class="attribute--row--box row--has--two--col">
+                 <label for="dictionaryName" class="attribute--row--box__title dictionaryName"><span class="text-danger">.</span>{{data.info.questName}}</label>
+                 <div class="grid--name--column checkbox" *ngIf="data.info.questCategory == 'M'">    
+                     <mat-checkbox
+                    
+                     (click)="$event.stopPropagation()"
+                     (change)="changeEvaluation($event,evalEventQuest.id)"
+                     *ngFor="let evalEventQuest of data.info.evalEventQuestList"
+                     [checked]="isChecked(evalEventQuest.id)"
+                         class="example-margin">{{evalEventQuest.itemName}}</mat-checkbox>
+                 </div>
+             
+                 <div class="grid--name--column" *ngIf="data.info.questCategory == 'S'"> 
+                     <mat-radio-group (change)="changeEvaluationSingle($event)"
+                 
+                         [(ngModel)]="data.info.evalEventQuest.itemIdsAudit"
+                     >
+                         <mat-radio-button class="single--radio--btn" 
+                         (click)="$event.stopPropagation()"
+                         [value]="evalEventQuest.id"
+                       
+                         *ngFor="let evalEventQuest of data.info.evalEventQuestList"
+                         >
+                         {{evalEventQuest.itemName}}</mat-radio-button>
+                                    
+                     </mat-radio-group>
+                 </div>
+ 
+                
+
+             </div>
+
+             <div class="attribute--row--box row--has--two--col">
+                <label for="dictionaryName" class="attribute--row--box__title dictionaryName"><span class="text-danger">.</span>评定说明</label>
+                <div class="grid--name--column" >    
+                    <textarea name="" class="form-control"  [(ngModel)]="data.info.evalEventQuest.remarksAudit"  rows="3"></textarea>
+                </div>
+            
+             
+
+               
+                
+            </div>
+           
+        
+         </div>
+ 
+ 
+     </mat-dialog-content>
+     <mat-dialog-actions>
+         <button mat-button type="button" mat-dialog-close>取消</button>
+         <button mat-flat-button color="primary" (click)="postDate()" >确定</button>
+     </mat-dialog-actions>
+</div>
+    
+
+<loading-message *ngIf="loading"></loading-message>

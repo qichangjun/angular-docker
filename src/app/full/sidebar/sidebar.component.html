@@ -1,0 +1,76 @@
+<!-- ============================================================== -->
+<!-- sidebar -->
+<!-- ============================================================== -->
+<div class="user-profile sidebar--column--wrapper">
+    <!-- <div class="user-box">
+        <div class="user--img">
+            <img src="assets/images/users/default-user.png" alt="">
+        </div>
+        <div>档案员，张三</div>
+    </div> -->  
+    <mat-nav-list appAccordion>
+        <mat-list-item appAccordionLink *ngFor="let menuitem of snavMenuItems" #ral="routerLinkActive" routerLinkActive="selected">
+            <div *ngIf="menuitem.type === 'link'">
+                <a class="menu--head" appAccordionToggle [routerLink]="['/',menuitem.state]"
+                ButtonPermissionController [buttonId]="menuitem.menuCode"
+                >
+                    <div class="item--name--box">
+                        <!-- <mat-icon>
+                            <i class=" {{ menuitem.icon }} left--sidebar--icon"></i>
+                        </mat-icon> -->
+                        <span>{{ menuitem.name }}</span>
+                        <span fxFlex></span>
+                        <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+                    </div>
+
+                </a>
+            </div>
+
+            <div *ngIf="menuitem.type === 'drawer'">
+                <a [routerLink]="['/',menuitem.state]" style="display: none"></a>
+                <a 
+                ButtonPermissionController [buttonId]="menuitem.menuCode"
+                class="menu--head" appAccordionToggle routerLinkActive="selected" (click)="menuitem.toggle=!menuitem.toggle">
+                    <div class="item--name--box">
+                        <!-- <mat-icon>
+                            <i class=" {{ menuitem.icon }} left--sidebar--icon"></i>
+                        </mat-icon> -->  
+                        <span>
+                            {{ menuitem.name }} 
+                        </span>
+                        <span fxFlex></span>
+                        <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+                    </div>
+                    <!-- <mat-icon>
+                        <span *ngIf="showMenuItemChild(ral,menuitem)"class="ti-angle-down" ></span>  
+                        <span *ngIf="!showMenuItemChild(ral,menuitem)" class="ti-angle-right"></span>         
+                    </mat-icon> -->
+                </a>
+                <div class="child--menu--box">
+                    <ul *ngFor="let child of menuitem.children">
+                        <li ButtonPermissionController [buttonId]="child.menuCode" *ngIf="child.type!=='new_window'" routerLinkActive="selected" [queryParams]="child.queryParams" [routerLink]="['/workspace/',menuitem.state,child.state]"
+                            class="node--name">
+                            <mat-icon>
+                                    <i class=" {{ child.icon }} left--sidebar--icon"></i>
+                                </mat-icon>
+                            <span>{{child.name}}  
+                                <span *ngIf="child.count != 0 && child.count" class="prompt--count"></span>       
+                            </span>
+                        </li>
+                        <li *ngIf="child.type=='new_window'" class="node--name">
+                            <a target="_blank" routerLinkActive="selected" [routerLink]="['/workspace/',child.state]" [queryParams]="child.queryParams">
+                                <mat-icon>
+                                        <i class=" {{ child.icon }} left--sidebar--icon"></i>
+                                    </mat-icon>
+                                <span>{{child.name}}</span>
+                            </a>
+                        </li>
+
+                    </ul>  
+                </div>
+            </div>
+
+        </mat-list-item>
+        
+    </mat-nav-list>
+</div>

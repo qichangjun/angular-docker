@@ -1,0 +1,13 @@
+
+
+<nav mat-tab-nav-bar class="assessment--symbol--mat--box">
+  <a mat-tab-link routerLinkActive #rla1="routerLinkActive"
+  [active]="rla1.isActive" routerLink="./SymbolInfo" >评估指标情况&nbsp;   
+  <span *ngIf="unitStatisticsInfo != 0 && unitStatisticsInfo" class="prompt--count"></span>    
+</a>
+  <a mat-tab-link routerLinkActive #rla2="routerLinkActive"
+  [active]="rla2.isActive" routerLink="./SymbolSetting" >评估指标设定</a>
+ 
+</nav>
+
+<router-outlet></router-outlet>

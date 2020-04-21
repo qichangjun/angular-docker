@@ -1,0 +1,138 @@
+<form [formGroup]="myForm" (ngSubmit)="postDate()" class="medium--dialog create--unit--dialog--wrap">
+    <h2 mat-dialog-title>
+        {{data.type == 'create' ? '新建保管期限分类' : '编辑保管期限分类'}}</h2>
+    <mat-dialog-content>
+        <div class="attribute--row--wrap">
+            <div class="attribute--row--box">
+                <label for="className" class="attribute--row--box__title className"><span class="text-danger">.</span>分类名称</label>
+                <div class="attribute--row--box__value">
+                    <input type="text" matInput class="form-control" id="className" formControlName="className" />
+                    <mat-error *ngIf="myForm.controls.className.invalid && myForm.controls.className.dirty">分类名称{{_formErrorMessageService.getErrorMessage(myForm.controls.className)}}</mat-error>
+                </div>
+            </div>
+          
+            <div class="attribute--row--box">
+                <label for="classCode" class="attribute--row--box__title classCode"><span class="text-danger">.</span>分类编码</label>
+                <div class="attribute--row--box__value">
+                    <input type="text" matInput class="form-control" id="classCode" formControlName="classCode" />
+                    <mat-error *ngIf="myForm.controls.classCode.invalid && myForm.controls.classCode.dirty">分类编码{{_formErrorMessageService.getErrorMessage(myForm.controls.classCode)}}</mat-error>
+                </div>
+            </div>
+
+            <div class="attribute--row--box">
+                <label for="classDesc" class="attribute--row--box__title classDesc">说明</label>
+                <div class="attribute--row--box__value">               
+                    <textarea  matInput class="form-control" id="classDesc" formControlName="classDesc" rows="2"></textarea>                   
+                </div>
+            </div>   
+
+            <div class="attribute--row--box">
+                    <label for="remarks" class="attribute--row--box__title remarks">上级类目</label>
+                    <div class="attribute--row--box__value">               
+                        <span>{{data.parentInfo.classCode}}</span>
+                        <span>{{data.parentInfo.className}}</span>
+                    </div>
+                </div>   
+                    
+            <div class="attribute--row--box ">
+                <label for="disabled" class="attribute--row--box__title dictionaryDescription">是否启用</label>
+                <div class="attribute--row--box__value">       
+                    <mat-slide-toggle
+                        class="example-margin"
+                        id="disabled" formControlName="disabled">
+                    </mat-slide-toggle>
+                    
+                </div>
+            </div>
+
+           
+
+               
+            
+            <div class="attribute--row--box">
+                <label for="isNeedFill" class="attribute--row--box__title dictionaryDescription"></label>
+                <div class="attribute--row--box__value">      
+                    <mat-checkbox id="isNeedFill" formControlName="isNeedFill" >
+                        在该类目上设定归档范围，保管期限以及其他相关信息
+                    </mat-checkbox>     
+                </div>
+            </div>
+
+
+            <div class="attribute--row--box row--has--two--col" [hidden]="!myForm.value.isNeedFill">
+                <label for="recordClass" class="attribute--row--box__title recordClass"><span class="text-danger">.</span>归档门类</label>
+                <div class="attribute--row--box__value">
+                    <mat-select class="form-control" id="recordClass" formControlName="recordClass">
+                        <mat-option *ngFor="let recordClassList of recordClassLists" [value]="recordClassList.id">
+                            {{recordClassList.dictionaryName}}
+                        </mat-option>
+                        <mat-option [value]="''">
+                            无
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="myForm.controls.recordClass.invalid && myForm.controls.recordClass.dirty">归档门类{{_formErrorMessageService.getErrorMessage(myForm.controls.recordClass)}}</mat-error>
+                </div>
+            </div>
+
+            <div class="attribute--row--box row--has--two--col last--child" [hidden]="!myForm.value.isNeedFill">
+                <label for="presPeriod" class="attribute--row--box__title presPeriod"><span class="text-danger">.</span>保管期限</label>
+                <div class="attribute--row--box__value">
+                    <mat-select class="form-control" id="presPeriod" formControlName="presPeriod">
+                        <mat-option *ngFor="let presPeriodList of presPeriodLists" [value]="presPeriodList.id">
+                            {{presPeriodList.dictionaryName}}
+                        </mat-option>
+                        <mat-option [value]="''">
+                            无
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="myForm.controls.presPeriod.invalid && myForm.controls.presPeriod.dirty">保管期限{{_formErrorMessageService.getErrorMessage(myForm.controls.presPeriod)}}</mat-error>
+                </div>
+            </div>
+
+            <div class="attribute--row--box row--has--two--col" [hidden]="!myForm.value.isNeedFill">
+                <label for="openClass" class="attribute--row--box__title openClass"><span class="text-danger">.</span>开放等级</label>
+                <div class="attribute--row--box__value">
+                    <mat-select class="form-control" id="openClass" formControlName="openClass">
+                        <mat-option *ngFor="let openClassList of openClassLists" [value]="openClassList.id">
+                            {{openClassList.dictionaryName}}
+                        </mat-option>
+                        <mat-option [value]="''">
+                            无
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="myForm.controls.openClass.invalid && myForm.controls.openClass.dirty">开放等级{{_formErrorMessageService.getErrorMessage(myForm.controls.openClass)}}</mat-error>
+                </div>
+            </div>
+
+            <div class="attribute--row--box row--has--two--col  last--child" [hidden]="!myForm.value.isNeedFill">
+                <label for="dueTimeAct" class="attribute--row--box__title dueTimeAct"><span class="text-danger">.</span>到期处置</label>
+                <div class="attribute--row--box__value">
+                    <mat-select class="form-control" id="dueTimeAct" formControlName="dueTimeAct">
+                        <mat-option *ngFor="let MaturityProcessList of MaturityProcessLists" [value]="MaturityProcessList.id">
+                            {{MaturityProcessList.dictionaryName}}
+                        </mat-option>
+                        <mat-option [value]="''">
+                            无
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="myForm.controls.dueTimeAct.invalid && myForm.controls.dueTimeAct.dirty">到期处置{{_formErrorMessageService.getErrorMessage(myForm.controls.dueTimeAct)}}</mat-error>
+                </div>
+            </div>
+
+            <div class="attribute--row--box" [hidden]="!myForm.value.isNeedFill">
+                <label for="remarks" class="attribute--row--box__title remarks">归档范围描述</label>
+                <div class="attribute--row--box__value">                 
+                    <textarea  matInput class="form-control" id="remarks" formControlName="remarks" rows="2"></textarea>                   
+                </div>
+            </div>
+        </div>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button type="button" mat-dialog-close>取消</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!myForm.valid">确定</button>
+    </mat-dialog-actions>
+</form>
+
+<loading-message *ngIf="loading"></loading-message>

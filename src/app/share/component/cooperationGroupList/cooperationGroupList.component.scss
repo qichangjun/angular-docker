@@ -1,0 +1,104 @@
+
+
+.cooperation--grouplist--box{
+    display: inline-block;
+    width: 235px;
+    height: 100%;
+    vertical-align: top;
+    border: 1px solid #ccd7e4;  
+    // margin-left: 12px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .caption{  
+        display: flex;
+        padding: 0 12px;
+        color: #25476A;
+        margin: 20px 0 20px;
+        justify-content: space-between;
+        align-items: center; 
+        mat-select{
+            width: 85px;  
+        } 
+    }
+    .list--box{
+        .head{
+            border-bottom: 1px solid #eee;
+            padding-left: 12px; 
+            padding-bottom: 6px;
+            margin-bottom: 8px; 
+            .num{
+                display: inline-block;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                text-align: center;
+                background: #1976d2;
+                color: #fff;
+                font-size: 12px;
+                margin-right: 8px;   
+            }
+            .audit--num{
+                font-size: 13px;
+                color: #fff;
+                // background: #efb239;
+                background: #ff0000;  
+                padding: 0px 9px;
+                border-radius: 10px;
+                margin-right: 8px;
+            }
+            .toggle--btn{
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 3px;
+                cursor: pointer;  
+            }
+        }
+        li{  
+            a{
+                padding-left: 37px;  
+                padding-top: 5px;
+                padding-bottom: 5px;  
+                color: #333333;
+                display: inline-block;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                &:hover{  
+                    background-color: rgba(233, 236, 238, 1);
+                }
+                &.selected{
+                    background-color: rgba(233, 236, 238, 1); 
+                    color: #1976D2;  
+                }
+                .right--contetn--box{
+                    padding-right: 8px;  
+                    nz-progress{
+                        margin-left: 5px;  
+                    }
+                }
+                .to--audit--icon{
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 15px;
+                    height: 15px;  
+                    background-image: url(/assets/images/to--audit--danger--icon.svg);      
+                    background-repeat: no-repeat;  
+                    background-size: cover;
+                    margin-right: 2px;
+                }
+                
+                .audited--icon{
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 15px;
+                    height: 11px;
+                    background-image: url(/assets/images/audited--icon.svg);  
+                    background-repeat: no-repeat;  
+                    background-size: cover;
+                   
+                }
+            }      
+        }
+    }
+}

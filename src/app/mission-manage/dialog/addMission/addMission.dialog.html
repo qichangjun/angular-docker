@@ -1,0 +1,132 @@
+<form [formGroup]="myForm" (ngSubmit)="postDate()" class="medium--dialog add--mission--dialog">
+        <h2 mat-dialog-title> 
+                新建任务</h2>
+        <mat-dialog-content>
+                <div class="attribute--row--wrap">
+                        <div class="attribute--row--box">  
+                                <!-- <label for="taskTitle" class="attribute--row--box__title head--title taskTitle">
+                                        <i class="ti-user"></i></label> -->
+                                <div class="attribute--row--box__value">
+                                        <input type="text" matInput class="form-control no--border" id="taskTitle" formControlName="taskTitle" placeholder="任务标题"/>
+                                        <mat-error *ngIf="myForm.controls.taskTitle.invalid && myForm.controls.taskTitle.dirty">
+                                                任务标题{{_formErrorMessageService.getErrorMessage(myForm.controls.taskTitle)}}
+                                        </mat-error>
+                                </div>
+                        </div>
+                        
+                        <div class="attribute--row--box">
+                                <label for="chooseGroupInfo" class="attribute--row--box__title no--title chooseGroupInfo">
+                                        <i class="ti-user"></i></label>
+                                <div class="attribute--row--box__value">
+                                        <choose-copperation-group-list id="chooseGroupInfo" formControlName="chooseGroupInfo" ></choose-copperation-group-list>
+                                </div>
+                        </div>
+                        
+                        
+
+                        <div class="attribute--row--box">
+                                <label for="startAt" class="attribute--row--box__title no--title startAt">
+                                        <i class="ti-calendar"></i></label>
+                                <div class="attribute--row--box__value">
+                                        <nz-date-picker id="startAt" formControlName="startAt" class="no--border"
+                                        nzPlaceHolder="请选择开始时间"
+                                        ></nz-date-picker>
+                                        <mat-error *ngIf="myForm.controls.startAt.invalid && myForm.controls.startAt.dirty">
+                                                开始时间{{_formErrorMessageService.getErrorMessage(myForm.controls.startAt)}}
+                                        </mat-error>~&nbsp;
+                                <!-- </div> -->
+                        <!-- </div>
+
+                        <div class="attribute--row--box">
+                                <label for="endAt" class="attribute--row--box__title endAt">
+                                        <i class="ti-user"></i>截止时间</label> -->
+                                <!-- <div class="attribute--row--box__value"> -->
+                                        <nz-date-picker id="endAt" formControlName="endAt" class="form-control no--border"
+                                        nzPlaceHolder="请选择截止时间"
+                                        ></nz-date-picker>
+                                        <mat-error *ngIf="myForm.controls.endAt.invalid && myForm.controls.endAt.dirty">
+                                                截止时间{{_formErrorMessageService.getErrorMessage(myForm.controls.endAt)}}
+                                        </mat-error>
+                                </div>
+                        </div>
+
+                        <div class="attribute--row--box">
+                                <label for="alarmTime" class="attribute--row--box__title no--title alarmTime">
+                                        <i class="ti-alarm-clock"></i></label>
+                                <div class="attribute--row--box__value">
+                                        <nz-date-picker id="alarmTime" formControlName="alarmTime" class="form-control no--border"
+                                        nzPlaceHolder="请选择提醒时间"
+                                        ></nz-date-picker>
+                                        <mat-error *ngIf="myForm.controls.alarmTime.invalid && myForm.controls.alarmTime.dirty">
+                                                设置提醒{{_formErrorMessageService.getErrorMessage(myForm.controls.alarmTime)}}
+                                        </mat-error>
+                                </div>
+                        </div>
+                        <div class="attribute--row--box description--textarea">
+                                <label for="isScore" class="attribute--row--box__title ver--top isScore">
+                                        <i class="ti-align-left"></i></label>
+                                <div class="attribute--row--box__value">                                             
+                                        <textarea id="taskDesc" class="form-control" placeholder="添加描述" formControlName="taskDesc" rows="3"></textarea>
+                                </div>
+                        </div>
+                        <div class="attribute--row--box">
+                                <label for="taskPrior" class="attribute--row--box__title has--space taskPrior">
+                                        <i class="ti-list"></i>优先级</label>
+                                <div class="attribute--row--box__value">
+                                        <mat-select id="taskPrior" formControlName="taskPrior">
+                                                <mat-option [value]="0">低</mat-option>
+                                                <mat-option [value]="1">中</mat-option>
+                                                <mat-option [value]="2">高</mat-option>
+                                        </mat-select>
+                                </div>
+                        </div>
+
+                        <!-- <div class="attribute--row--box">
+                                <label for="isScore" class="attribute--row--box__title isScore">
+                                        <i class="ti-slice"></i>是否记分</label>
+                                <div class="attribute--row--box__value">
+                                        <mat-slide-toggle id="isScore" formControlName="isScore" class="example-margin">
+                                        </mat-slide-toggle>
+
+                                </div>
+                        </div> -->
+
+                        <div class="attribute--row--box no--space">
+                                        <label for="isScore" class="attribute--row--box__title no--title isScore">
+                                                <i class="ti-clip"></i></label>
+                                        <div class="attribute--row--box__value mission--upload">
+                                                <form-upload
+                                                [displayName]="'添加附件'"
+                                                [uploadUrl]="'missionUpload'"
+                                                (uploadFinish)="uploadFinish($event)"
+                                                ></form-upload>
+                
+                                                </div>         
+                        </div>
+                       
+                        <div class="upload--file--box">
+                                <ul>
+                                        <li *ngFor="let file of accessoryIdList;let i = index">
+                                                <img class="file--type--icon" onerror="this.src='assets/images/icon/unknown.svg'" src="./assets/images/icon/{{file['name'] | fileNameToIcon}}.svg"
+                                                alt="">
+                                                {{file.name}}
+
+                                                <span (click)="accessoryIdList.splice(i,1)" class="remove--btn ti-close"></span>
+                                        </li>
+                                </ul>
+                        </div>
+                     
+                        
+
+                        
+                </div>
+
+
+        </mat-dialog-content>
+        <mat-dialog-actions>
+                <button mat-button type="button" mat-dialog-close>取消</button>
+                <button mat-flat-button color="primary" type="submit" [disabled]="!myForm.valid">确定</button>
+        </mat-dialog-actions>
+</form>
+
+<loading-message *ngIf="loading"></loading-message>

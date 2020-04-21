@@ -1,0 +1,156 @@
+
+
+<div class="general--archive--plan--head--box">
+  <h1>综合归档计划</h1>  
+  <div class="prompt--content--box" [ngClass]="{'warning':auditInfo.CURRENT_STS == 'S',
+  'successed':auditInfo.CURRENT_STS == 'F',
+  'error':(auditInfo.CURRENT_STS == 'B' || auditInfo.CURRENT_STS == '其他')}">  
+    <i class="fa fa-info-circle"></i>   
+    当前状态： {{auditInfo.CURRENT_STS == 'S' ? '提交未备案' : 
+    auditInfo.CURRENT_STS == 'B' ? '退回' :
+    auditInfo.CURRENT_STS == 'F' ? '已备案' :
+    auditInfo.CURRENT_STS == '其他' ? '未提交' : '未提交'}}   
+    <span class="remove--btn" style="cursor: pointer;" (click)="checkDetail()">详细信息</span>
+  </div>   
+</div>
+<div class="flex--data--wrap">
+  <cooperation-group-list #cooperationList [type]="'generalArchive'"></cooperation-group-list>
+  <div class="data--content--wrap">
+    <div class="option--btn--wrap">
+      <mat-checkbox 
+      (change)="changeDisableStatus()"
+        [checked]="parameter.disabled == 'true'"
+      >显示已失效的分类和相关信息</mat-checkbox>
+      <div class="option--btn--box">
+        <!-- <button mat-flat-button color="primary" type="button" (click)="passAudit()">通过审核</button> -->  
+        <button mat-flat-button color="primary" *ngIf="treeDatas.length > 0" type="button" (click)="postReviewOpinion()"><i class="btn--icon submit--review--com"></i>提出审核意见</button>
+        <button mat-flat-button color="primary" type="button"><i class="btn--icon import"></i>导入/导出计划</button>
+      </div>
+    </div>
+    <div class="data--list--box">
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="200">
+              <div class="th-inner first" (click)="sortList('name')">档案分类
+                  <!-- <span class="fa fa-caret-up" *ngIf="showSortIcon('name','asc')"></span>
+                  <span class="fa fa-caret-down" *ngIf="showSortIcon('name','desc')"></span> -->
+              </div>
+            </th>
+            <th width="150">
+              <div class="th-inner" (click)="sortList('name')">编码
+                
+              </div>
+            </th>
+            
+            <th width="240">
+                <div class="th-inner" (click)="sortList('name')">类目说明
+                  
+                </div>
+            </th>
+            <th width="240">
+              <div class="th-inner" (click)="sortList('name')">归档描述范围
+                
+              </div>
+            </th>
+            <th width="180">  
+              <div class="th-inner" (click)="sortList('name')">档案门类
+                
+              </div>
+            </th>
+            <th width="150">
+              <div class="th-inner" (click)="sortList('name')">保管期限  
+                
+              </div>
+            </th>
+            <th width="240">
+              <div class="th-inner" (click)="sortList('name')">到期处置动作
+                
+              </div>
+            </th>
+            <th width="150">  
+              <div class="th-inner" (click)="sortList('name')">访问等级
+                
+              </div>
+            </th>
+            <th width="150">
+              <div class="th-inner" (click)="sortList('name')">当前状态
+                
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody style="overflow-y: auto">
+          <ng-container *ngFor="let menu of treeDatas">
+            <ng-container *ngTemplateOutlet="tree; context: menu"></ng-container>
+          </ng-container>
+        </tbody>
+    </table>
+
+
+    
+    <ng-template #tree let-info="info" let-level="level" let-id="id" let-parentId="parentId">
+    <tr>
+        <td class="info--name--td">
+            <span [style.paddingLeft]="(level - 1) * 17 + 'px'"                >
+                <span *ngIf="info.toggle"
+                (click)="info.toggle = !info.toggle;loadChildren(info,level,id)"
+                class="fa fa-caret-down"></span>
+                <span *ngIf="!info.toggle"
+                (click)="info.toggle = !info.toggle;loadChildren(info,level,id)"
+                class="fa fa-caret-right"></span>
+                <a [ngClass]="{'selected':currentId==id}" class="info--name" (click)="info.toggle = !info.toggle;loadChildren(info,level,id)">{{info.className}}</a>
+            </span>
+        </td>
+        <td>
+          {{info.classCode}}
+        </td>
+        <td>
+          {{info.classDesc}}
+        </td>
+        <td>
+          {{info.remarks}}
+        </td>
+        
+        <td>
+          {{getRecordClassName(info.recordClass)}}
+        </td>
+        <td>
+          {{getPresPeriodName(info.presPeriod)}}
+        </td>
+        <td>
+          {{info.dueTimeAct}}
+        </td>
+        <td>
+          {{getOpenLevelNameName(info.openClass)}}
+        </td>
+        <td class="slide--toggle">
+          <mat-slide-toggle
+          class="example-margin"
+          [color]="color"
+          [checked]="info.disabled != 1"
+          [disabled]="true">
+    
+        </mat-slide-toggle>
+    
+        </td>
+    </tr>
+    <tr *ngIf="info.loading">
+        <td colspan="9" class="loading--td">
+        <svg class="spinner" width="25px" height="25px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="2" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+        </svg>
+        </td>
+    </tr>
+    <ng-container *ngIf="info.toggle">
+        <ng-container *ngFor="let child of info.children">
+        <ng-container *ngTemplateOutlet="tree; context: child"></ng-container>
+        </ng-container>
+    </ng-container>
+    
+    </ng-template>
+    </div>
+  </div>
+</div>  
+
+

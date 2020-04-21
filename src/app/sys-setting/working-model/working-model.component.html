@@ -1,0 +1,15 @@
+<!-- <div class="right--content--option--box">
+    <div class="option--btn--box">
+      
+    </div>  
+  </div> -->
+  
+  <div class="right--content--date--list--box has--margin">
+    <ag-grid-angular  #sourceSys class="ag-theme-material grid--list no--left--border--grid" enableColResize rowHeight="50" [gridOptions]="gridOptions">
+    </ag-grid-angular>  
+    <my-pagination [pageSize]="parameter.pageSize"
+    [totalElement]="parameter.totalElement"
+   [currentPage]="parameter.currentPage"></my-pagination>
+    <loading-message *ngIf="loading"></loading-message>
+  </div>
+  

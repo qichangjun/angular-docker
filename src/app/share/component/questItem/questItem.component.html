@@ -1,0 +1,41 @@
+<div>
+    <table class="table">
+        <tr>
+            <th>评分说明</th>
+            <th>分值</th>
+            <th width="130">等级</th>  
+            <th></th>
+        </tr>
+        <tr *ngFor="let value of valueInfo;let i = index">
+            <td>  
+                <textarea name="" id="" class="form-control textarea--one--row" [(ngModel)]="value.itemName" rows="1"></textarea>
+                <!-- <input type="text" class="form-control" [(ngModel)]="value.itemName"> -->
+            </td>
+
+            <td>
+                <span>
+                    <input type="number" class="form-control" [(ngModel)]="value.score">
+                </span>
+            </td>
+
+            <td>
+               <mat-select [(ngModel)]="value.levelid" class="form-control" (selectionChange)="changeOpinionClass($event,value)">                     
+                   <mat-option *ngFor="let symbolLevelList of symbolLevelLists" [value]="symbolLevelList.id" >
+                       {{symbolLevelList.dictionaryName}}
+                   </mat-option>
+                 
+               </mat-select>
+            </td>
+            <td class="ti-trash--td"> 
+                <span (click)="removeValueInfo(i)" class="ti-trash"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <button mat-stroked-button type="button" (click)="addValueInfo()" class="add--item--btn"><i class="ti-plus"></i></button>
+            </td>
+        </tr>
+       
+    </table>
+    
+</div>

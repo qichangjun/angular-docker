@@ -1,0 +1,47 @@
+.fa-cog{
+  font-size: 24px;
+}
+
+.fa-search{
+  font-size: 20px;
+}
+.fa-navicon{
+  font-size: 20px;
+  line-height: 44px;
+}
+.ti-menu{
+  font-size: 20px;
+  line-height: 40px;
+}
+.navbar-brand{
+  padding: 0 !important;
+}
+.navbar-header{
+  padding-left: 29px;
+}
+mat-toolbar.topbar{
+  padding: 0px 22px 0 22px;
+}
+.page-content{
+  padding: 16px !important;
+  background: #f2f2f2;  
+  clear: both;
+}
+app-header{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.mat-icon-button{
+  height: auto;
+  line-height: normal;
+}
+.light-logo{
+  color:white;
+  font-size: 16px;
+  line-height: normal;
+}
+
+mat-sidenav-content{
+  background: #ffffff;
+}

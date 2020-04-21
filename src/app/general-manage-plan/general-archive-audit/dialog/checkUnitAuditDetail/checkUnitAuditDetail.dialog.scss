@@ -1,0 +1,43 @@
+.check--unit--audit--detail--dialog{
+    // background: #3a3a3a;  
+    .attribute--row--wrap{
+        display: flex;
+        align-items: flex-start;
+        .left--content--wrap{
+            flex: 1;  
+        }
+        .right--content--wrap{
+            flex: 1;
+            margin-left: 36px;  
+        }
+        .left--content--wrap, .right--content--wrap{
+            .head{
+                font-size: 14px;
+                line-height: normal;
+                color: #aaaaaa;
+                padding-bottom: 3px;  
+                border-bottom: 1px solid #c3c2c2;  
+            }
+            .row--box{
+                margin-bottom: 7px;  
+                .title{
+                    display: inline-block;
+                    width: 100px;  
+                }
+            }
+        }
+    }
+}
+.audit--comment--box{
+    margin-top: 10px;
+    .title{
+        display: inline-block;
+        vertical-align: top;
+        width: 100px;
+    }
+    .data--list{
+        display: inline-block;
+        width: calc(100% - 100px);
+        vertical-align: top;  
+    }
+}

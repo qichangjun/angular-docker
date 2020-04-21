@@ -1,0 +1,94 @@
+@charset "utf-8";
+.post--review--option--dialog--wrap{  
+  .attribute--row--wrap{
+    padding-top: 7px;
+    .attribute--row--box{
+      margin-bottom: 16px;
+      &.show--oinion--row--box{  
+        border-top: 1px solid #aaaaaa;
+        padding-top: 16px;    
+      }
+      .dictionary--name--select{
+          display: inline-block;
+          width: 115px;
+          margin: 0 6px;  
+      }
+      &.add--opinion--box{
+          display: flex;
+          mat-select{
+            flex-shrink: 1;
+          }
+          button{
+            flex-shrink: 0;
+            margin-left: 8px; 
+          }
+      }
+      .input--opinion--box{ 
+        // display: flex; 
+        display: inline-block;  
+        width: calc(100% - 118px);
+        input{
+            // flex-shrink: 1;
+            // width: calc(100% - 118px);
+        }  
+        button{  
+            flex-shrink: 0;
+            margin-left: 8px; 
+          }   
+    }
+    button{  
+      margin-left: 8px; 
+    }  
+      .input--prompt--content{
+          margin-bottom: 8px;  
+      }
+    }
+    .auditsts--box{
+        margin: 24px 0 0 0;   
+        &.right--content{
+          // border-bottom: 1px solid #aaaaaa; 
+          .caption{
+            display: inline-block;
+            border-bottom: none;
+            margin-right: 48px;  
+          }
+        }
+        .caption{
+            font-size: 14px;  
+            line-height: normal;
+            padding-bottom: 4px;
+            margin-bottom: 13px;
+            border-bottom: 1px solid #aaaaaa;    
+        }
+        li{
+            margin-bottom: 13px;  
+            display: flex;
+            align-items: center;
+        }
+        .num{
+            display: inline-block;
+            width: 21px;
+            height: 21px;
+            background: #1976d2;  
+            color: #ffffff;  
+            text-align: center;
+            margin-right: 8px;
+        }
+        mat-radio-button{
+            margin-right: 24px;
+        }
+        .ti-trash{
+          color: #d81e06;  
+          margin-left: 5px;  
+          cursor: pointer;  
+        }
+    }
+  }
+}
+.text-danger{  
+  position: absolute;
+  top: 4px;
+  left: 0;
+  font-size: 20px;
+  line-height: 0;
+}

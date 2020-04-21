@@ -1,0 +1,187 @@
+:host{
+    display: block;
+    width: 100%;
+    // position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      //overflow-y: auto;
+    //margin: 10px auto;
+    //padding: 20px 9px;
+    //border: 0.5px #cccccc solid;
+  }
+  .grid--border--box{
+    //border-top: none;
+    //border-left: none;
+    //border-right: 1px solid #b7b7b7;
+    //border-bottom: 1px solid #b7b7b7;
+    //margin-bottom: 3px;
+    //margin: 0px 0px -1px -1px;
+    //margin:0px 0px -1px -1px;
+  }
+  .form--build--box--input--box{
+    width:100%;
+    height:100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 2px;
+    .form--build--box--input{
+      width:100%;
+      height:100%;
+      border-width: 0 !important;
+      box-shadow: none;
+      outline: none;
+      background: transparent;
+      padding: 0;
+      text-align: left;
+      &:focus{
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+      }
+      &.showBorder{
+        height: 32px;
+        border-width: 1px !important;
+        &.textarea--input{
+          height: 100%;
+        }
+      }
+    }
+    .date--toggle{
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  .radio--build--box{
+    vertical-align: middle;
+    display: table-cell;
+    font-size: 14px;
+    font-weight: normal;
+    .single--radio--btn{
+      margin-right: 5px;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+  .create--record--dialog--upload--box{
+    width:100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: left;
+    position: relative;
+    .head--box{
+      margin: 5px 0 5px 5px;
+      .upload--btn{
+        display: inline-block;
+        width: calc(100% - 100px);
+        margin-left: 5px;
+      }
+    }
+    .upload--data--list--box{
+      width: 100%;
+      padding-left: 8px;
+      min-height: 10px;
+      .single--data{
+        margin-bottom: 3px;
+        display: inline-block;
+        //width: 30%;
+        width: 100%;
+        margin-right: 5px;
+        .file--name{
+          display: inline-block;
+          vertical-align: middle;
+          width: calc(100% - 60px);
+          padding-left: 3px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .delete--btn{
+          cursor: pointer;
+          color: #d9534f;
+        }
+        .file--type--icon{
+          width: 16px;
+        }
+      }
+    }
+  }
+  .mat-checkbox{
+    margin-right: 5px;
+  }
+  .fileinput-button {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+  
+  .fileinput-button input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    height: 100%;
+    font-size: 200px;
+  }
+  .mat-dialog-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    button{
+      margin-right: 5px;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+  .tile--options--content--type--box{
+    width:100%;
+    height: 100%;
+    //padding: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .label--wrap{
+      width: 100%;
+    }
+    .label--box{
+      width: 100%;
+      padding: 0 10px 0 15px;
+      position: relative;
+      .text-danger{
+        position: absolute;
+        left: 5px;
+        top: 4px;
+        font-size: 20px;
+        line-height: 0;
+      }
+    }
+  }
+  .drag-container{
+    height: 50px;
+    padding-top: 13px;
+    text-align: center;
+    position: absolute;
+    width: 200px;
+    left: 50%;
+    margin-left: -100px;
+    background: #eee;
+    top: 13px;
+    border-radius: 2px;
+    border: 1px dashed #cccccc;
+    color: #7d7d7d;
+  }
+  .choose--server--file--prompt{
+    display: inline-block;
+    padding: 3px 0;
+  }
+  .choose--server--file--list--box{
+    .single--data{
+      padding-bottom: 3px;
+      cursor: default;
+    }
+  }

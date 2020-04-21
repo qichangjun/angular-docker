@@ -1,0 +1,30 @@
+<div class="score--order--unit--info--box"> 
+    <div class="cell-box">
+      <span class="out--mun--icon icon"></span>  
+      <div class="data--description">
+        <p class="head">评估项未提交</p>{{unitStatisticsInfo.OUT_NUM}}
+      </div>        
+    </div>
+    <div class="cell-box">  
+      <span class="submit--mun--icon icon"></span>  
+      <div class="data--description">
+        <p class="head">评估项待审核</p>{{unitStatisticsInfo.SUBMIT_NUM}}
+      </div>
+    </div>
+    <div class="cell-box">
+      <span class="finish--mun--icon icon"></span>
+      <div class="data--description">
+        <p class="head">评估项已审核</p>{{unitStatisticsInfo.FINISH_NUM}}
+      </div>      
+    </div>
+</div>
+
+<div class="right--content--date--list--box">
+  <ag-grid-angular #sourceSys class="ag-theme-material grid--list no--left--border--grid" enableColResize rowHeight="44" [gridOptions]="gridOptions">
+  </ag-grid-angular>
+  <my-pagination [pageSize]="parameter.pageSize"
+  [totalElement]="parameter.totalElement"
+ [currentPage]="parameter.currentPage"></my-pagination>
+  <loading-message *ngIf="loading"></loading-message>
+</div>
+

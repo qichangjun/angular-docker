@@ -1,0 +1,42 @@
+@charset "utf-8";
+.pagination--box{
+  height: 60px;
+  text-align: right;
+  // padding-right: 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .input--number{
+    display: inline-block;
+    vertical-align: top;
+    width: 50px;
+    margin: 0 5px;
+    border-color: #e0e0e0;
+    height: 28px;  
+  }
+  .mat-stroked-button{
+    vertical-align: top;
+    min-width: 55px;
+    height: 34px;
+    background: #fff;
+  }
+  mat-select{
+    display: inline-block;
+    vertical-align: middle;
+    width: 55px;
+    padding: 4px;
+    height: 28px;
+    text-align: center;
+    margin: 0 5px;
+  }
+  .page--btn{
+    border: none;
+    min-width: 25px !important;
+    padding: 0 !important;
+    cursor: pointer;
+    vertical-align: middle;
+    &:hover{
+      background: none;
+    }
+  }
+}

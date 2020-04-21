@@ -1,0 +1,36 @@
+<mat-sidenav-container style="height: 100%;background: #ffffff;" [hasBackdrop]="false">
+    <mat-sidenav-content style="overflow: hidden;background: #ffffff;" [ngClass]="{'has-side-bar':sidenav._opened}">
+<div class="right--content--option--box">
+  <div>
+    <mat-select (selectionChange)="changeStatus()" [(ngModel)]="parameter.status">
+      <mat-option [value]="''">所有任务</mat-option>
+      <mat-option [value]="'0'">未完成</mat-option>
+      <mat-option [value]="'1'">已完成</mat-option> 
+      <mat-option [value]="'2'">逾期</mat-option>    
+    </mat-select>
+    <div class="search--box">
+      <input type="text" class="form-control search--input" [(ngModel)]="parameter.taskTitle">
+      <i class="ti-search search--btn"  (click)="changeStatus()"></i>
+    </div>
+   
+  </div>
+  <div class="option--btn--box">         
+    <button mat-flat-button color="primary" type="button" (click)="addMission()"><i class="btn--icon add--task"></i>添加任务</button>
+    <!-- <button mat-flat-button color="warn" type="button" *ngIf="selectedRows.length > 0" (click)="deleteMission()"><i class="ti-trash"></i>删除任务</button> -->
+  </div>  
+</div>  
+<div class="right--content--date--list--box has--margin">    
+  <ag-grid-angular  #sourceSys class="ag-theme-material grid--list no--left--border--grid" enableColResize rowHeight="50" [gridOptions]="gridOptions">
+  </ag-grid-angular>
+  <my-pagination [pageSize]="parameter.pageSize"
+  [totalElement]="parameter.totalElement"
+ [currentPage]="parameter.currentPage"></my-pagination>
+  <loading-message *ngIf="loading"></loading-message>
+</div>
+</mat-sidenav-content>
+<mat-sidenav #sidenav (openedChange)="openedChange($event)" style="width:400px" mode="side" position="end" class="mat--sidenav">
+    <mission-edit-side-bar *ngIf="checkedRowId" [id]="checkedRowId" [disableEdit]="false"
+    (closeSideBarAndUpdate)="closeSideBarAndUpdate($event)"
+    ></mission-edit-side-bar>
+</mat-sidenav>
+</mat-sidenav-container>

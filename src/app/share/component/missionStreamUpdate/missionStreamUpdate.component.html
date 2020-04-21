@@ -1,0 +1,49 @@
+<div class="attribute--row--wrap">
+        <div class="attribute--row--box description--textarea">
+                <label for="isScore" class="attribute--row--box__title isScore">
+                        <i class="ti-align-left"></i>
+                </label>
+                <div class="attribute--row--box__value">
+                        <textarea placeholder="完成描述" class="form-control" rows="3" [(ngModel)]="submitDec" [hidden]="(sts != '0' && sts != '3') || receiveSts == 0"
+                                [disabled]="(sts != '0' && sts != '3') || receiveSts == 0"></textarea>
+
+                        <span *ngIf="(sts == 0 || sts == 3) && receiveSts != 0" class="submit--dec">  
+                                {{submitDec}}
+                        </span>
+                </div>
+        </div>
+
+        <div class="attribute--row--box upload--row--box" [ngClass]="{'has-no-upload-button':(sts != '0' && sts != '3') || receiveSts== 0}">
+                <label for="isScore" class="attribute--row--box__title no--title isScore">
+                        <i class="ti-clip"></i>
+                </label>
+                <div class="attribute--row--box__value mission--upload">
+                        <form-upload *ngIf="(sts == '0' || sts == '3') && receiveSts!= 0" [displayName]="'添加附件'" [additionalParams]="{'id':id}" [uploadUrl]="'importAccessory'"
+                                (uploadFinish)="uploadFinish($event)"></form-upload>
+
+                </div>
+                <div class="upload--file--box">
+                        <ul>
+                                <li *ngFor="let file of accessoryIdList;let i = index">
+                                        <img class="file--type--icon" onerror="this.src='assets/images/icon/unknown.svg'" src="./assets/images/icon/{{file['filename'] | fileNameToIcon}}.svg"
+                                                alt=""> 
+                                                
+                                                <a (click)="downloadFile(file)">{{file.filename}}</a>
+
+                                        <span *ngIf="sts == '0' || sts == '3'" class="remove--btn ti-close"
+                                        nz-popconfirm
+                                        nzOkText="确定"
+                                        nzCancelText="取消"
+                                        nzTitle="确定要删除该文件吗?"
+                                        nzPopconfirmPlacement="bottom"
+                                        (nzOnConfirm)="deleteMissionStreamFile(file)"
+                                        ></span>
+                                </li>
+                        </ul>
+                </div>
+                <div class="option--tab--submit--box">
+                        <button type="button" *ngIf="(sts == '0' || sts == '3') && receiveSts!= 0" mat-flat-button color="accent" (click)="updateMissionStrean()">确定</button>
+                </div>
+        </div>
+
+</div>

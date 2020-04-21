@@ -1,0 +1,39 @@
+<form [formGroup]="myForm" (ngSubmit)="postDate()" class="medium--dialog create--unit--dialog--wrap">
+    <h2 mat-dialog-title>
+        {{data.type == 'create' ? '新建意见' : '编辑意见'}}</h2>
+    <mat-dialog-content>
+        <div class="attribute--row--wrap">
+            <div class="attribute--row--box ">
+                <label for="parentId" class="attribute--row--box__title parentId"><span class="text-danger">.</span>意见分类</label>
+                <div class="attribute--row--box__value">
+                    <mat-select  class="form-control" id="parentId" formControlName="parentId" >
+                        <mat-option *ngFor="let opinion of opinionClass" [value]="opinion.id">
+                            {{opinion.dictionaryName}}
+                        </mat-option>
+                        <mat-option [value]="''">
+                            无
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="myForm.controls.parentId.invalid && myForm.controls.parentId.dirty">意见分类{{_formErrorMessageService.getErrorMessage(myForm.controls.parentId)}}</mat-error>
+                </div>
+            </div>
+          
+            <div class="attribute--row--box last--child">
+                <label for="dictionaryName" class="attribute--row--box__title dictionaryName"><span class="text-danger">.</span>意见</label>
+                <div class="attribute--row--box__value">
+                    <input type="text" matInput class="form-control" id="dictionaryName" formControlName="dictionaryName" />
+                    <mat-error *ngIf="myForm.controls.dictionaryName.invalid && myForm.controls.dictionaryName.dirty">意见{{_formErrorMessageService.getErrorMessage(myForm.controls.dictionaryName)}}</mat-error>
+                </div>
+            </div>
+
+        </div>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button type="button" mat-dialog-close>取消</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!myForm.valid">确定</button>
+    </mat-dialog-actions>
+</form>
+
+<loading-message *ngIf="loading"></loading-message>

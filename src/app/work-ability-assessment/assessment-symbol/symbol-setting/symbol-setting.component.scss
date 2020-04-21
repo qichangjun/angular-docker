@@ -1,0 +1,16 @@
+:host{
+    display: inline-block;
+    width: 100%;
+    height: calc(100% - 61px);
+    background: #fff;
+    border: 1px solid #ccd7e4;    
+}
+.mat-tab-nav-bar{
+    margin: 12px 12px 0;  
+}
+.mat-tab-link{
+    &.mat-tab-label-active{
+      color: #0E88E5;  
+      opacity: 1;  
+    }
+  }

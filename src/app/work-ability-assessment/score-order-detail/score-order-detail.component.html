@@ -1,0 +1,61 @@
+
+<p class="head">业务能力指标</p>  
+<div class="main--content--box">
+    <div class="quset--score--wrap">
+        <div class="sum--quset--score--box">
+            <div class="quset--content--box">
+                <div>
+                    <h1>
+                        {{SumQusetScore.questsum}}
+                    </h1>
+                    <div class="unit--name">
+                            {{SumQusetScore.unitName}}
+                    </div>
+                    <div class="prompt">
+                        综合得分位列所有立档单位第{{SumQusetScore.rank}}
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="pie--info--wrap">
+            <div class="pie--info--box">
+                <div id="pie_container" class="chart--box" style="min-width:300px;height: 100%;"></div>      
+                <table class="table table-bordered">  
+                    <tr>
+                        <th></th>
+                        <th>符合数</th>
+                        <th>符合比例</th>
+                    </tr>
+                    <tr *ngFor="let pieInfo of pieInfoLists">
+                        <td>{{pieInfo.dict_name}}</td>
+                        <td>{{pieInfo.count}}</td>
+                        <td>{{pieInfo.weight}}%</td>
+                    </tr>
+                </table>
+            </div>
+                
+        </div>
+    </div>
+    
+    <div class="grp--progress--box">     
+        <div id="container" class="chart--box" style="width: inherit;height: 100%; min-width: 300px; max-width: 400px;"></div>     
+        <div class="grp--sum--info--box">  
+            <ul>
+                <li *ngFor="let grp of grpScoreInfo" class="single--data--box">
+                    {{grp.grpName}}
+                    <div class="progress--bar--box">
+                        <mat-progress-bar *ngIf="grp.sum >= grp.avg" [color]="'primary'" mode="determinate" value="{{(grp.sum/100)*100}}"></mat-progress-bar>
+                        <mat-progress-bar *ngIf="grp.sum < grp.avg" [color]="'warn'" mode="determinate" value="{{(grp.sum/100)*100}}"></mat-progress-bar>
+                        {{grp.sum}}分</div>
+                    <div *ngIf="grp.order != -1" class="grp--order">
+                        平均分：{{grp.avg}}分，位列所有立档单位第{{grp.order}}名
+                    </div>
+                    <div *ngIf="grp.order == -1" class="grp--order">
+                            平均分：{{grp.avg}}分，暂无排名
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

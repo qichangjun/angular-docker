@@ -1,0 +1,56 @@
+<div class="doc-breadcrumb-container clearfix">
+    <ol class="doc-breadcrumb  list-unstyled">
+      <li class="doc-breadcrumb__li"  *ngIf="breadCrumbLists.length == 0">
+        
+          <span class="doc-breadcrumb__li__click__title">{{rootName}}</span>
+          <span class="fa fa-angle-right" ></span>
+      </li>
+
+      <li class="doc-breadcrumb__li" *ngIf="breadCrumbLists.length > 0">
+        <a (click)="gotoRoot(rootName)" class="doc-breadcrumb__li__click"  >
+          <span class="doc-breadcrumb__li__click__title">{{rootName}}</span></a>
+        <span class="fa fa-angle-right" ></span>
+       
+      </li>
+
+      <ng-container *ngIf="breadCrumbLists.length < 5">
+        <li class="doc-breadcrumb__li" *ngFor="let breadNode of breadCrumbLists; let i = index" >
+          <span *ngIf="i < breadCrumbLists.length-1">
+              <a (click)="onSelect(breadNode)" class="doc-breadcrumb__li__click"  >
+                <span class="doc-breadcrumb__li__click__title">{{breadNode.objectName}}</span></a>
+              <span class="fa fa-angle-right" ></span>
+
+           
+          </span>
+          
+          <span *ngIf="i == breadCrumbLists.length-1">
+                <span >{{breadNode.objectName}}</span>
+          </span>
+        </li>
+      </ng-container>
+      
+      <ng-container *ngIf="breadCrumbLists.length >= 5">
+        <li class="doc-breadcrumb__li" *ngFor="let breadNode of breadCrumbLists; let i = index" >
+          <span *ngIf="i < 1 ">
+              <a (click)="onSelect(breadNode)" class="doc-breadcrumb__li__click"  >
+                <span class="doc-breadcrumb__li__click__title">{{breadNode.objectName}}</span></a>
+                  <span class="fa fa-angle-right" ></span>
+          </span>
+  
+          <span *ngIf="i==2">...</span>
+          <span *ngIf="breadCrumbLists.length - 1 > i && i > breadCrumbLists.length - 3">
+          
+             <a (click)="onSelect(breadNode)" class="doc-breadcrumb__li__click"  >
+                <span class="doc-breadcrumb__li__click__title">{{breadNode.objectName}}</span></a>
+                  <span class="fa fa-angle-right" ></span>
+            </span>
+  
+          <span *ngIf="i == breadCrumbLists.length-1">
+            <span >{{breadNode.objectName}}</span>
+          </span>
+        </li>     
+      </ng-container>
+    </ol>
+  
+  </div>
+  

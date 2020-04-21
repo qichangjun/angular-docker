@@ -1,0 +1,57 @@
+<form [formGroup]="myForm" (ngSubmit)="reviewMission()" >
+    <div class="small--dialog add--mission--dialog">
+        <h2 mat-dialog-title>
+            完成确认</h2>
+        <mat-dialog-content>
+            <div class="attribute--row--wrap">
+                <div class="attribute--row--box description--textarea">
+                    <label for="taskTitle" class="attribute--row--box__title taskTitle">
+                        <i class="ti-align-left"></i></label>
+                    <div class="attribute--row--box__value has--two--row">
+                        {{submitDec}}                        
+                    </div>
+                </div>
+                <div class="attribute--row--box ">
+                    <label for="taskTitle" class="attribute--row--box__title no--title taskTitle">
+                        <i class="ti-clip"></i></label>文件  
+                </div>
+                <div class="upload--file--box">
+                    <ul>
+                        <li *ngFor="let file of accessoryIdList;let i = index">
+                                <img class="file--type--icon" onerror="this.src='assets/images/icon/unknown.svg'" src="./assets/images/icon/{{file['filename'] | fileNameToIcon}}.svg"
+                                alt="">
+                                {{file.filename}}                            
+                        </li>
+                    </ul>
+                   
+                </div>
+                <div class="attribute--row--box description--textarea">
+                    <label for="taskTitle" class="attribute--row--box__title taskTitle">
+                        <i class="ti-align-left"></i></label>
+                    <div class="attribute--row--box__value">
+                        <textarea [readonly]="!data.enableEdit" 
+                        id="remarksAudit" formControlName="remarksAudit"
+                   class="form-control" rows="3" placeholder="任务评价"></textarea>
+
+                   <mat-error *ngIf="myForm.controls.remarksAudit.invalid && myForm.controls.remarksAudit.dirty">
+                        任务评价长度不能超过100
+                    </mat-error>
+                    </div>
+                </div>
+        
+            </div>
+        
+        
+        </mat-dialog-content>
+        <mat-dialog-actions class="option--btn--box">
+            <button mat-stroked-button type="button"  [disabled]="!myForm.valid" *ngIf="data.enableEdit" (click)="backMission()">退回</button>
+            <button mat-flat-button  type="button"  color="accent"  [disabled]="!myForm.valid" *ngIf="data.enableEdit" (click)="reviewMission()">完成</button>
+            <button mat-flat-button color="accent" mat-dialog-close>取消</button>
+        </mat-dialog-actions>
+        
+    </div>
+</form>
+
+
+
+<loading-message *ngIf="loading"></loading-message>

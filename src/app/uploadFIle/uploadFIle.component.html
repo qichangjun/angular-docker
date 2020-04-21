@@ -1,0 +1,61 @@
+<div [@routeAnimation]="routeAnimation" *ngIf="selectTotal > 0" class="uploadMessage" [ngClass]="{showUploadMessage:showUploadContainer}">
+    <div class="home--upload--wrap">
+      <div class="home--upload--head--box">
+            <span [hidden]="showUploadContainer" (click)="toggleWindow();" class="ti-minus"></span>
+            <span [hidden]="!showUploadContainer" (click)="toggleWindow()" class="ti-control-stop"></span>
+            <span (click)="removeAllFiles();closePopup()" class="ti-close"></span>
+      </div>
+        <div class="home--upload--table--box--wrap fixed-table" [ngClass]="{showUploadContainer:showUploadContainer}">
+          <div class="fixed-table-header"></div>
+          <div class="fixed-table-content">
+            <table class="table table-hover home--upload--table--box" >
+              <thead>
+                <tr class="table__th--tr">
+                  <th ><div class="th-inner upload--table--file--name--td">文件名</div></th>
+                  <th ><div class="th-inner">文件大小</div></th>
+                  <th ><div class="th-inner">状态</div></th>  
+                  <th class="option--th"><div class="th-inner">操作</div></th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <ng-container *ngFor="let uploader of uploaders">
+                      <tr *ngFor="let file of uploader.queue; let i = index">
+                          <td title="{{file._file.name}}"><div class="upload--table--file--name--td">{{file._file.name}}</div></td>
+                          <td>{{file.file.size | sizefilter}}</td>                      
+                          <td>
+                            <span *ngIf="file.isError" class="fa fa-exclamation-circle status--prompt--icon" style="color: #cd624c"></span>
+                            <span *ngIf="file.isSuccess" class="fa fa-check-circle status--prompt--icon" style="color: #56DA90"></span>
+                          <span *ngIf="file.isUploading">
+                            {{file.progress}}%
+                          </span>
+                          <span *ngIf="file.isReady && !file.isUploading">
+                              排队中...
+                          </span>
+                          </td>
+                          <td >
+                            <div [hidden]="file.isSuccess">
+                              <button type="button" class="btn btn-success btn-xs"
+                                      (click)="file.upload()" [disabled]="file.isReady || file.isUploading || file.isSuccess">
+                                <span class="ti-export"></span> 上传
+                              </button>
+                              <button type="button" class="btn btn-warning btn-xs"
+                                      (click)="file.cancel()" [disabled]="!file.isUploading">
+                                <span class="ti-na"></span> 取消
+                              </button>
+                              <button type="button" class="btn btn-danger btn-xs"
+                                      (click)="file.remove()">
+                                <span class="ti-trash"></span> 移除
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                  </ng-container>
+             
+              </tbody>
+          </table>
+          </div>
+        </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,29 @@
+:host{
+    display: inline-block;
+    width: 100%;
+    height: calc(100% - 54px);  
+}
+.right--content--option--box{
+    padding: 15px 14px;
+    text-align: right;
+    .option--btn--box{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        button{
+            margin-right: 8px;
+            &:last-child{
+                margin-right: 0;  
+            }
+        }
+    }
+}
+.right--content--date--list--box{
+    // margin: 0 12px;
+    height: calc(100% - 62px);  
+    .grid--list{
+        width: 100%;
+        height: calc(100% - 60px);  
+        padding: 0 14px;
+    }
+}   

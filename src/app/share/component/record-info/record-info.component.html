@@ -1,0 +1,125 @@
+<!-- <div class="record--info--wrap" style="position: relative;" [style.width]="formWidth + 'px'" >
+    <mat-grid-list [gutterSize]="'0px'" #container cols="18" rowHeight="10px">
+        <mat-grid-tile  class="grid--border--box" *ngFor="let tile of tiles;let i = index" [colspan]="tile.options.cols" [rowspan]="tile.options.rows"
+        [style.borderLeft]="tile.getStyle('border-left')"
+        [style.borderRight]="tile.getStyle('border-right')"
+        [style.borderTop]="tile.getStyle('border-top')"
+        [style.borderBottom]="tile.getStyle('border-bottom')"
+        [style.background]="tile.getStyle('backgroundColor')">
+            <div [ngSwitch]="tile.options.contentType" class="tile--options--content--type--box"
+                [style.textAlign]="tile.getStyle('text-align')"
+                [style.fontWeight]="tile.getStyle('fontWeight')"
+                [style.color]="tile.getStyle('fontColor')" [style.fontSize]="tile.getStyle('fontSize') + 'px'"
+                [style.background]="tile.getStyle('backgroundColor')">
+                <div *ngSwitchCase="'label'" class="label--wrap">
+                    <span *ngFor="let label of tile.options.labelName" class="label--box">
+                         <span class="text-danger" *ngIf="tile.options.required == 'true'">. </span>
+                            <span *ngIf="label.type == 'text'">{{label.value}}</span>
+                            <span *ngIf="label.type == 'attr'">{{entity[label.value]}}</span>
+                    </span>
+                </div>
+                <div *ngSwitchCase="'input'" class="form--build--box--input--box">
+                    <input [style.textAlign]="tile.getStyle('text-align')" type="text" [ngClass]="{'showBorder' : tile.getStyle('inputBorder') == 'show'}"  [disabled]="disableEdit" class="form-control form--build--box--input"  [(ngModel)]="entity[tile.options.attrName]">
+                </div>
+                <div *ngSwitchCase="'radio-button'" class="radio--build--box">
+                    <mat-radio-group [(ngModel)]="entity[tile.options.attrName]">
+                        <mat-radio-button [disabled]="disableEdit" class="single--radio--btn" *ngFor="let radioAttr of tile.options.radioBtnAttrs" [value]="radioAttr">{{radioAttr}}</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div *ngSwitchCase="'check-box'" class="radio--build--box">
+                    <section  class="example-section form--build--box--input">
+                        <mat-checkbox
+                        [checked]="isChecked(tile,checkBoxAttr)"
+                         [disabled]="disableEdit" (change)="toggleCheckbox($event,tile,checkBoxAttr)" *ngFor="let checkBoxAttr of tile.options.checkBoxAttrs"
+                            class="example-margin">{{checkBoxAttr}}</mat-checkbox>
+                    </section>
+                </div>
+                <div *ngSwitchCase="'select'" class="form--build--box--input--box">
+                    <select [ngClass]="{'showBorder' : tile.getStyle('inputBorder') == 'show'}"  [disabled]="disableEdit" class="form-control form--build--box--input" [(ngModel)]="entity[tile.options.attrName]">
+                        <option *ngFor="let selectAttr of tile.options.selectAttrs" [value]="selectAttr.value">{{selectAttr.displayName}}</option>
+                    </select>
+                </div>
+                <div *ngSwitchCase="'text-area'" class="form--build--box--input--box">
+                    <textarea [ngClass]="{'showBorder' : tile.getStyle('inputBorder') == 'show'}"  [disabled]="disableEdit" class="form-control form--build--box--input textarea--input" [(ngModel)]="entity[tile.options.attrName]"></textarea>
+                </div>
+                <div *ngSwitchCase="'upload'" class="create--record--dialog--upload--box">
+                    <span class="tile--file--name">
+                        {{tile.options.fileDisplayName}}
+                    </span>
+                    <div class="head--box">
+                        <div *ngIf="!disableEdit">
+                            <form-upload class="upload--btn" [uploadUrl]="'commonUpload'" [attrName]="tile.options.attrName" (uploadFinish)="uploadFinish($event)"></form-upload>
+                        </div>
+                    </div>
+                    <div class="upload--data--list--box">
+                        <div  *ngFor="let file of entity[tile.options.attrName];let i = index" class="single--data">
+                            <img class="file--type--icon" onerror="this.src='assets/images/icon/unknown.svg'" src="./assets/images/icon/{{file['name'] | fileNameToIcon}}.svg"
+                                alt="">
+                            <span *ngIf="file.isNew" class="file--name">
+                                {{file['name']}}
+                            </span>
+                            <a *ngIf="!file.isNew" (click)="previewDoc(file['url'])" class="file--name">
+                                {{file['name']}}
+                            </a>
+                            <span *ngIf="!disableEdit" (click)="deleteFile(tile,file,i) " class="delete--btn ti-trash"></span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase="'date'" class="form--build--box--input--box">                    
+                    <nz-date-picker
+                    nzShowTime
+                    [nzDisabled] = "disableEdit"
+                     [ngClass]="{'showBorder' : tile.getStyle('inputBorder')  == 'show'}"  [(ngModel)]="entity[tile.options.attrName]"  class="form--build--box--input" [nzFormat]="tile.options.typeFormat"></nz-date-picker>
+                </div>
+                <div *ngSwitchCase="'process-list'" class="form--build--box--input--box stepper">
+                    <mat-horizontal-stepper [linear]="isLinear" labelPosition="bottom" #stepper>
+                        <mat-step *ngFor="let progressNode of progressNodes"  [completed]="false">
+                            <ng-template matStepLabel>
+                                <div class="ode--name"><span>{{progressNode.name}}</span></div>
+                                <div><span>操作人：{{progressNode.operator}}</span></div>
+                                <div><span>操作时间：{{progressNode.operate_date}}</span></div>
+                            </ng-template>
+                          <div class="pro--content--box">
+                            <div *ngFor="let pro of progressNode.property" class="single--pro">
+                              {{pro.title}}：{{pro.content}}
+                            </div>
+                          </div>
+                        </mat-step>
+                      </mat-horizontal-stepper>
+                </div>
+                <div *ngSwitchCase="'table'" class="form--build--box--input--box" style="overflow-y: auto;">
+                    <table class="table table-bordered">
+                        <tr>
+                            <ng-container *ngFor="let tableAttr of tile.options.tableAttrs;let x = index">
+                                <th *ngIf="!tableAttr.isNotShow">
+                                    {{tableAttr.title}}
+                                </th>
+                            </ng-container>
+                        </tr>
+                        <tr *ngFor="let tableEntity of tableEntitys[tile.options.attrName];let e = index">
+                            <ng-container *ngFor="let tableAttr of tile.options.tableAttrs;let x = index">
+                                <td *ngIf="!tableAttr.isNotShow">
+                                    <input [disabled]="disableEdit" type="text" class="form-control form--build--box--input" InitTableValue [tableEntity]="tableEntity" [key]="tableAttr.jsonPath"
+                                        [(ngModel)]="tableEntity[tableAttr.jsonPath]">
+
+                                </td>
+                            </ng-container>
+                            <td>
+                                <button *ngIf="!disableEdit" class="btn btn-default fa fa-minus-circle" (click)="tableEntitys[tile.options.attrName].splice(e,1)"></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <button *ngIf="!disableEdit" class="btn btn-default fa fa-plus-circle" (click)="addTableList(tile.options.attrName)"></button>
+                        </tr>
+                    </table>
+                </div>
+                <div *ngSwitchCase="'logo'" class="form--build--box--input--box">
+                    <img style="height: 100%;
+                    width: 100%;" onerror="this.src = './assets/images/icon-40.png'" [src]="tile.options.logoSrc" alt="">
+                </div>
+            
+                <div *ngSwitchDefault>请选择一个类型</div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div> -->

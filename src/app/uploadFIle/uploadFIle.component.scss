@@ -1,0 +1,162 @@
+:host { position: absolute; bottom: 0px;right:0px; }
+.example-container{
+  width: 200px;
+  height: 1000px;
+  border-right: 1px solid black;
+  float: left
+}
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+.active{
+  background-color: gray;
+}
+
+.uploadMessage{
+  width: 700px;
+  //max-height: 300px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+  background: white;
+  //overflow: scroll;
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 20px 10px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+  border-radius: 4px 4px 0 0;
+  &.showUploadMessage{
+    width: 400px;
+    position: fixed;
+    left: 51px;
+    @media (max-width: 1366px) {
+      left: 41px;
+    }
+  }
+}
+.home--upload--wrap{
+  //border: 1px solid #ccc;
+  //border-radius: 4px 4px 0 0;
+  padding: 15px 15px 0 15px;
+  .home--upload--head--box--wrap{
+    width: calc(100% - 20px);
+    position: absolute;
+  }
+  .home--upload--head--box{
+    display: flex;
+    justify-content: flex-end;
+    //height: 30px;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #585858;
+    font-size: 14px;
+    .ti-close{
+      margin-left: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      &:hover{
+        opacity: .8;
+      }
+    }
+    .ti-minus{
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .ti-control-stop{
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+  .status--prompt--icon{
+    padding-left: 6px;
+    font-size: 15px;
+  }
+}
+.home--upload--table--box--wrap{
+  //width: 100%;
+  //max-height: 300px;
+  //overflow-y: auto;
+  &.fixed-table{
+    position: relative;
+    padding-top: 30px;
+    //width: 400px;
+    border: 1px solid #ddd;
+    .fixed-table-header{
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 30px;
+      background-color: #eee;
+      //border-bottom: 1px solid #ddd;
+    }
+    .fixed-table-content{
+      max-height: 300px;
+      overflow-y: auto;
+      .table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 0;
+        .th-inner {
+          position: absolute;
+          top: 0;
+          height: 30px;
+          line-height: 30px;
+          padding-left: 10px;
+          &:last-child{
+            margin-left: -10px;
+          }
+        }
+        .th-inner:not(:first-child) {
+          border-left: 1px solid #ddd;
+        }
+        td {
+          padding-left: 10px;
+        }
+        & > thead > tr > th {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+        .option--th{
+          min-width: 60px;
+          max-width: 230px;
+        }
+      }
+    }
+  }
+  &.showUploadContainer{
+    display: none;
+  }
+}
+.home--upload--table--box{
+  //margin-top: 40px;
+  .table__th--tr{
+    th{
+      border: none;
+    }
+  }
+
+}
+
+.upload--table--file--name--td{
+  //max-width: 160px;
+  min-width: 200px;
+  max-width: 295px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-xs{
+  margin-right: 8px;
+  &:last-child{
+    margin-right: 0;
+  }
+  .ti-export,.ti-na,.ti-trash{
+    display: inline-block;
+    vertical-align: middle;
+  }
+}

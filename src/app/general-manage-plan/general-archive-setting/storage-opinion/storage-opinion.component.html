@@ -1,0 +1,15 @@
+
+<div class="right--content--option--box">
+  <div class="option--btn--box">     
+    <button mat-flat-button color="primary" type="button" (click)="createRetentionPeriod()"><i class="btn--icon create--com"></i>新建意见分类</button>
+    <button mat-flat-button color="warn" type="button" *ngIf="selectedRows.length > 0" (click)="delete()"><i class="ti-trash"></i>删除</button>
+  </div>  
+</div>  
+<div class="right--content--date--list--box has--margin">    
+  <ag-grid-angular  #sourceSys class="ag-theme-material grid--list no--left--border--grid" enableColResize rowHeight="50" [gridOptions]="gridOptions">
+  </ag-grid-angular>
+  <my-pagination [pageSize]="parameter.pageSize"
+  [totalElement]="parameter.totalElement"
+ [currentPage]="parameter.currentPage"></my-pagination>
+  <loading-message *ngIf="loading"></loading-message>
+</div>

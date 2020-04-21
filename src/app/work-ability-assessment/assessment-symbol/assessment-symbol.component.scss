@@ -1,0 +1,19 @@
+:host{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}  
+.mat-tab-nav-bar{  
+  margin: 0 0 12px 0;
+  border: none;  
+}
+
+.mat-tab-link{
+    // width:calc(50% - 48px) !important;      
+    flex-grow: 1;     
+    font-size: 18px; 
+    &.mat-tab-label-active{
+      color: #0E88E5; 
+      opacity: 1;   
+    }
+  }

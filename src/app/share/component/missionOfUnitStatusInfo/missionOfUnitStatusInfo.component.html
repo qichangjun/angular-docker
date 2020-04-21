@@ -1,0 +1,37 @@
+<mat-tab-group>
+  <mat-tab label="未交 {{statusInfo.unPost.count}}">
+    <ul>
+      <li *ngFor="let unit of statusInfo.unPost.data" >
+        {{unit.receiveUnitName}}
+      </li>
+    </ul>
+  </mat-tab>
+  <mat-tab label="已交 {{statusInfo.posted.count}}">
+    <ul>
+      <li *ngFor="let unit of statusInfo.posted.data" (click)="checkUnitPostInfo(unit,true)">
+        {{unit.receiveUnitName}}
+      </li>
+    </ul>
+  </mat-tab>
+  <mat-tab label="完成 {{statusInfo.audited.count}}">
+    <ul>
+      <li *ngFor="let unit of statusInfo.audited.data" (click)="checkUnitPostInfo(unit,false)">
+        {{unit.receiveUnitName}}
+      </li>
+    </ul>
+  </mat-tab>
+  <mat-tab label="退回 {{statusInfo.rejected.count}}">
+    <ul>
+      <li *ngFor="let unit of statusInfo.rejected.data" (click)="checkUnitPostInfo(unit,false)">
+        {{unit.receiveUnitName}}
+      </li>
+    </ul>
+  </mat-tab>
+  <mat-tab label="未读 {{statusInfo.unread.count}}">
+    <ul>
+      <li *ngFor="let unit of statusInfo.unread.data" >
+        {{unit.receiveUnitName}}
+      </li>
+    </ul>
+  </mat-tab>
+</mat-tab-group>

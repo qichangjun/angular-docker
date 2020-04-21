@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+Dockerfile*
+.dockerignore
+.gitignore
+package-lock.json
+LICENSE
+.vscode
+.github
+e2e
+teamwork
+dist
+.codecov.yml
+*.md
+
+
