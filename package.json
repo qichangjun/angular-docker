@@ -39,7 +39,7 @@
     "koa": "^2.11.0",
     "koa-route": "^3.2.0",
     "koa-static": "^5.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-zorro-antd": "^7.5.0",
     "ng2-file-upload": "1.2.1",
     "ngx-perfect-scrollbar": "^6.0.0",    
